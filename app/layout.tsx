@@ -1,0 +1,36 @@
+import type { Metadata } from "next";
+import "@/styles/globals.css";
+import { Header } from "@/components/sections/Header";
+import { Footer } from "@/components/sections/Footer";
+import { LanguageProvider } from "@/context/LanguageContext";
+
+export const metadata: Metadata = {
+  title: "DigiBase - Enterprise IT Infrastructure Solutions",
+  description: "Leading IT infrastructure solutions provider in Armenia. Data centers, cloud solutions, and enterprise security systems.",
+  keywords: ["IT infrastructure", "data center", "cloud solutions", "security systems", "Armenia"],
+  authors: [{ name: "DigiBase" }],
+  openGraph: {
+    title: "DigiBase - Enterprise IT Infrastructure Solutions",
+    description: "Building the digital foundation of tomorrow",
+    type: "website",
+    locale: "en_US",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="antialiased">
+        <LanguageProvider>
+          <Header />
+          {children}
+          <Footer />
+        </LanguageProvider>
+      </body>
+    </html>
+  );
+}
