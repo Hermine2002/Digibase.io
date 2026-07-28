@@ -19,7 +19,7 @@ export function useMousePosition(throttleMs: number = 16) {
   });
 
   const handleMouseMove = useCallback(
-    throttle((e: MouseEvent) => {
+    throttle((e: any) => {
       setPosition({
         x: e.clientX,
         y: e.clientY,
