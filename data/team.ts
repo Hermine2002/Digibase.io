@@ -54,7 +54,7 @@ export const team: Member[] = [
       ru: "Директор по развитию бизнеса (CBDO) — 20+ лет опыта в сфере Телеком и IT",
     },
     initials: "ԱՍ",
-    photo: "/images/aram-safaryan.png",
+    photo: "/images/ChatGPT Image Jul 29, 2026, 12_35_02 PM.png",
     isLeadership: true,
   },
 

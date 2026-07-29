@@ -264,59 +264,78 @@
     }
   },
 
-  "about": {
-    "aboutUs": { "hy": "Մեր մասին", "en": "About Us", "ru": "О нас" },
-    "heroTitle": {
-      "hy": "Տեխնոլոգիաներ, որոնք խթանում են բիզնեսի աճը",
-      "en": "Technologies that Drive Business Growth",
-      "ru": "Технологии, которые стимулируют рост бизнеса"
-    },
-    "heroSubtitle1": {
-      "hy": "Մենք հավատում ենք, որ տեխնոլոգիայի իսկական արժեքը կազմակերպությունները ավելի խելացի, անվտանգ և արդյունավետ դարձնելն է։",
-      "en": "We believe that the true value of technology lies in making organizations smarter, safer, and more efficient.",
-      "ru": "Мы верим, что истинная ценность технологий заключается в том, чтобы сделать организации умнее, безопаснее и эффективнее."
-    },
-    "heroSubtitle2": {
-      "hy": "Մենք մասնագիտացած ենք տվյալների կենտրոնների, կիբերանվտանգության, ցանցերի և առաջադեմ անվտանգության համակարգերի նախագծման և իրականացման մեջ։",
-      "en": "We specialize in designing and implementing data centers, cybersecurity infrastructure, networking, and advanced security systems.",
-      "ru": "Мы специализируемся на проектировании и внедрении дата-центров, инфраструктуры кибербезопасности, сетей и передовых систем безопасности."
-    },
-    "philosophyTitle": {
-      "hy": "Մենք պարզապես սարքավորում չենք մատակարարում։",
-      "en": "We don't just supply hardware.",
-      "ru": "Мы не просто поставляем оборудование."
-    },
-    "philosophyText1": {
-      "hy": "Մեր փիլիսոփայությունը պարզ է՝ մենք կառուցում ենք համապարփակ տեխնոլոգիական էկոհամակարգեր, որոնք նպաստում են բիզնեսի աճին և ապահովում են գործառնական շարունակականություն։",
-      "en": "Our operating philosophy is straightforward: our goal is to build comprehensive technological ecosystems that foster business growth and ensure operational continuity.",
-      "ru": "Наша операционная философия проста: мы строим комплексные технологические экосистемы, способствующие росту бизнеса и обеспечивающие операционную непрерывность."
-    },
-    "journeyTitle": {
-      "hy": "Աշխարհահռչակ տեխնոլոգիաներ բերելով Հայաստան",
-      "en": "Bringing world-class technology to Armenia",
-      "ru": "Принося технологии мирового класса в Армению"
-    },
-    "journeyText1": {
-      "hy": "DigiBase-ը հիմնադրվել է հստակ տեսլականով՝ Հայաստան բերել աշխարհահռչակ տեխնոլոգիական լուծումներ։",
-      "en": "DigiBase was founded with a clear vision: to bring world-class technological solutions to the Armenian market.",
-      "ru": "DigiBase была основана с четким видением: принести технологии мирового класса на армянский рынок."
-    },
-    "teamTitle": {
-      "hy": "Թիմը մեր հաջողության հետևում",
-      "en": "The team behind our success",
-      "ru": "Команда, стоящая за нашим успехом"
-    },
-    "teamText1": {
-      "hy": "Յուրաքանչյուր հաջող նախագիծ սկսվում է նվիրված թիմից։",
-      "en": "Every successful project begins with a dedicated team.",
-      "ru": "Каждый успешный проект начинается с преданной команды."
-    },
-    "teamText2": {
-      "hy": "DigiBase-ում մենք ոչ միայն իրականացնում ենք տեխնոլոգիա, այլև կառուցում ենք վստահելի հարաբերություններ։",
-      "en": "At DigiBase, we don't just implement technology—we build trusted relationships.",
-      "ru": "В DigiBase мы не просто внедряем технологии — мы строим доверительные отношения."
-    }
+ "about": {
+  "aboutUs": {
+    "hy": "Մեր մասին",
+    "en": "About Us",
+    "ru": "О нас"
   },
+  "heroTitle": {
+    "hy": "Տեխնոլոգիաներ, որոնք զարգացնում են բիզնեսը",
+    "en": "Technologies that Drive Business Growth",
+    "ru": "Технологии, которые развивают бизнес"
+  },
+  "heroSubtitle1": {
+    "hy": "Մենք հավատում ենք, որ տեխնոլոգիայի իրական արժեքը կազմակերպությունների աշխատանքն ավելի խելացի, անվտանգ ու արդյունավետ դարձնելու մեջ է։",
+    "en": "We believe that the true value of technology lies in making organizations smarter, safer, and more efficient.",
+    "ru": "Мы верим, что истинная ценность технологий заключается в том, чтобы делать работу организаций более умной, безопасной и эффективной."
+  },
+  "heroSubtitle2": {
+    "hy": "Մենք մասնագիտացած ենք պետական կառույցների և մասնավոր ընկերությունների կարիքներին հարմարեցված տվյալների կենտրոնների (Data Center), կիբերանվտանգության, ցանցային ու անվտանգության համակարգերի ներդրման մեջ։ Մեր յուրաքանչյուր նախագծի հիմքում թիմի պրոֆեսիոնալիզմն է, տեխնիկական փորձառությունը և հաճախորդների ու վենդորների հետ երկարաժամկետ գործընկերությունը։",
+    "en": "We specialize in designing and implementing data centers, cybersecurity infrastructure, networking, and advanced security systems tailored to the unique needs of government institutions and private enterprises. At the core of every project we deliver is our team’s deep technical expertise, proven professionalism, and a commitment to long-term partnerships with both our clients and global technology vendors.",
+    "ru": "Мы специализируемся на проектировании и внедрении дата-центров (ЦОД), систем кибербезопасности, сетевых решений и комплексных систем безопасности, адаптированных под нужды государственных структур и частного бизнеса. В основе каждого нашего проекта лежат профессионализм команды, глубокая техническая экспертиза и долгосрочное партнерство с клиентами и мировыми вендорами."
+  },
+  "philosophyTitle": {
+    "hy": "Մենք պարզապես սարքավորումներ չենք տրամադրում։",
+    "en": "We do not just supply hardware.",
+    "ru": "Мы не просто поставляем оборудование."
+  },
+  "philosophyText1": {
+    "hy": "Մեր նպատակն է ստեղծել ամբողջական տեխնոլոգիական էկոհամակարգեր, որոնք կխթանեն բիզնեսի աճը, կապահովեն աշխատանքի անխափանությունն ու կդառնան ձեր թվային տրանսֆորմացիայի հիմքը։",
+    "en": "Our goal is to build comprehensive technological ecosystems that foster business growth, ensure operational continuity, and serve as the backbone of your digital transformation.",
+    "ru": "Наша цель — создавать целостные технологические экосистемы, которые стимулируют рост бизнеса, обеспечивают непрерывность процессов и становятся фундаментом вашей цифровой трансформации."
+  },
+  "journeyTitle": {
+    "hy": "Մեր ուղին",
+    "en": "Our Journey",
+    "ru": "Наш путь"
+  },
+  "journeyText1": {
+    "hy": "DigiBase-ը հիմնադրվել է հստակ տեսլականով՝ հայաստանյան շուկա բերել համաշխարհային մակարդակի տեխնոլոգիական լուծումներ և դառնալ երկրի առաջատար ու վստահելի համակարգային ինտեգրատորներից մեկը։",
+    "en": "DigiBase was founded with a clear vision: to bring world-class technological solutions to the Armenian market and establish ourselves as one of the country's leading and most trusted systems integrators.",
+    "ru": "Компания DigiBase была основана с четким видением: внедрять на рынке Армении технологические решения мирового уровня и стать одним из ведущих и надежных системных интеграторов в стране."
+  },
+  "journeyText2": {
+    "hy": "Տարիների ընթացքում մենք հաջողությամբ իրականացրել ենք բազմաթիվ նախագծեր բանկային, պետական, կրթական և կորպորատիվ ոլորտներում։ Մեր շարունակական աճի գրավականը հաճախորդների վստահությունն է, աշխարհի առաջատար տեխնոլոգիական բրենդների հետ ռազմավարական գործընկերությունը և երկարաժամկետ արժեք ստեղծող լուծումներ ներդնելու մեր հանձնառությունը։",
+    "en": "Over the years, we have successfully executed numerous high-impact projects across the banking, public, educational, and corporate sectors. The key to our continuous growth is the trust of our clients, strategic partnerships with global technology leaders, and our dedication to delivering solutions that create lasting value.",
+    "ru": "За годы работы мы успешно реализовали множество масштабных проектов в банковском, государственном, образовательном и корпоративном секторах. Залогом нашего непрерывного роста являются доверие клиентов, стратегическое партнерство с ведущими ИТ-брендами планеты и стремление создавать решения, приносящие долгосрочную ценность."
+  },
+  "teamTitle": {
+    "hy": "Թիմը՝ յուրաքանչյուր հաջողության թիկունքում",
+    "en": "The Team Behind Our Success",
+    "ru": "Команда — основа каждого успеха"
+  },
+  "teamText1": {
+    "hy": "Յուրաքանչյուր հաջողված նախագիծ սկսվում է նվիրված թիմից։ DigiBase-ը համախմբում է բարձր որակավորում ունեցող ինժեներների, համակարգային ճարտարապետների, պրոյեկտ մենեջերների և տեխնիկական խորհրդատուների, որոնց միավորում է մեկ ընդհանուր նպատակ՝ թիմային աշխատանքի ու փորձառության շնորհիվ ապահովել բացառիկ արդյունք։",
+    "en": "Every successful project begins with a dedicated team. DigiBase brings together highly qualified engineers, systems architects, project managers, and technical consultants united by a single goal: achieving exceptional results through teamwork and shared expertise.",
+    "ru": "Каждый успешный проект начинается с преданной делу команды. DigiBase объединяет высококвалифицированных инженеров, системных архитекторов, проджект-менеджеров и технических консультантов, сплоченных единой целью — обеспечивать исключительный результат благодаря синергии и опыту."
+  },
+  "teamText2": {
+    "hy": "Մենք խրախուսում ենք շարունակական ուսուցման, գիտելիքների փոխանակման և մասնագիտական աճի մշակույթը, ինչը թույլ է տալիս մեր թիմին միշտ քայլել տեխնոլոգիական միտումներին ու միջազգային ստանդարտներին համընթաց։",
+    "en": "We foster a culture of continuous learning, knowledge sharing, and professional growth. This mindset allows our team to stay ahead of global technology trends and align with international industry standards.",
+    "ru": "Мы развиваем культуру непрерывного обучения, обмена знаниями и профессионального роста, что позволяет нашей команде всегда идти в ногу с глобальными технологическими трендами и международными стандартами."
+  },
+  "teamText3": {
+    "hy": "Մեր հաճախորդներն աշխատում են այնպիսի մասնագետների հետ, որոնք լսում են, հասկանում խնդիրը և պատասխանատվություն կրում յուրաքանչյուր մարտահրավերի համար։ Նախնական խորհրդատվությունից ու նախագծումից մինչև ներդրում և հետագա տեխնիկական սպասարկում՝ մենք ապահովում ենք բարձր որակ, ինչն էլ հենց դառնում է մեր երկարաժամկետ գործընկերության հիմքը։",
+    "en": "Our clients work with specialists who listen, thoroughly understand the problem, and take full ownership of every challenge. From initial consultation and design to deployment and ongoing technical support, we deliver a standard of quality that becomes the foundation of our long-term relationships.",
+    "ru": "Наши клиенты работают со специалистами, которые умеют слушать, глубоко понимают задачу и несут ответственность за каждый вызов. От первичного консалтинга и проектирования до внедрения и последующего технического обслуживания — мы обеспечиваем бескомпромиссное качество, которое и становится основой долгосрочного партнерства."
+  },
+  "teamText4": {
+    "hy": "DigiBase-ում մենք պարզապես տեխնոլոգիաներ չենք ներդնում. մենք կառուցում ենք վստահելի հարաբերություններ, լուծում բարդ խնդիրներ և օգնում կազմակերպություններին վստահորեն կերտել իրենց թվային ապագան։",
+    "en": "At DigiBase, we don't just implement technology—we build trusted relationships, solve complex challenges, and help organizations confidently shape their digital future.",
+    "ru": "В DigiBase мы не просто внедряем технологии — мы строим доверительные отношения, решаем сложные задачи и помогаем организациям уверенно создавать свое цифровое будущее."
+  }
+},
 
   
 
