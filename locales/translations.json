@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "home": { "hy": "Գլխավոր", "en": "Home", "ru": "Главная" },
@@ -8,7 +9,7 @@
     "contact": { "hy": "Կապ", "en": "Contact", "ru": "Контакты" }
   },
 
-  "hero": {
+"hero": {
     "badge": {
       "hy": "Ձեռնարկատիրական IT ենթակառուցվածքային լուծումներ",
       "en": "Enterprise IT Infrastructure Solutions",
@@ -41,171 +42,6 @@
     }
   },
 
-  "solutionsPreview": {
-    "eyebrow": {
-      "hy": "Մեր Լուծումները",
-      "en": "Our Solutions",
-      "ru": "Наши Решения"
-    },
-    "title": {
-      "hy": "Նախագծեր, որոնք սահմանում են գերազանցություն",
-      "en": "Projects That Define Excellence",
-      "ru": "Проекты, определяющие совершенство"
-    },
-    "viewAll": {
-      "hy": "Դիտել բոլոր լուծումները",
-      "en": "View all solutions",
-      "ru": "Посмотреть все решения"
-    },
-    "projects": {
-      "oracle": {
-        "title": {
-          "hy": "Oracle Ենթակառուցվածք",
-          "en": "Oracle Infrastructure",
-          "ru": "Инфраструктура Oracle"
-        },
-        "description": {
-          "hy": "Կորպորատիվ մակարդակի տվյալների բազայի ենթակառուցվածքի ներդրում բարձր հասանելիության կլաստերավորմամբ և աղետների վերականգնման լուծումներով:",
-          "en": "Enterprise-grade database infrastructure deployment with high-availability clustering and disaster recovery solutions for mission-critical operations.",
-          "ru": "Развертывание инфраструктуры баз данных корпоративного уровня с высокодоступной кластеризацией и решениями для аварийного восстановления."
-        },
-        "tags": {
-          "database": { "hy": "Տվյալների բազա", "en": "Database", "ru": "База данных" },
-          "enterprise": { "hy": "Կորպորատիվ", "en": "Enterprise", "ru": "Корпоративный" }
-        }
-      },
-      "softconstruct": {
-        "title": {
-          "hy": "SoftConstruct Մոդուլային ՏԿ",
-          "en": "SoftConstruct Modular DC",
-          "ru": "Модульный ДЦ SoftConstruct"
-        },
-        "description": {
-          "hy": "Ժամանակակից հավաքովի մոդուլային տվյալների կենտրոն՝ առաջադեմ հովացման, էլեկտրաանուցման բաշխման և խելացի մոնիտորինգի համակարգերով:",
-          "en": "State-of-the-art prefabricated modular data center with advanced cooling, power distribution, and intelligent monitoring systems.",
-          "ru": "Современный сборный модульный дата-центр с передовыми системами охлаждения, распределения питания и интеллектуального мониторинга."
-        },
-        "tags": {
-          "dataCenter": { "hy": "Տվյալների Կենտրոն", "en": "Data Center", "ru": "Дата-центр" },
-          "modular": { "hy": "Մոդուլային", "en": "Modular", "ru": "Модульный" }
-        }
-      },
-      "idbank": {
-        "title": {
-          "hy": "IDBank Active-Active",
-          "en": "IDBank Active-Active",
-          "ru": "IDBank Active-Active"
-        },
-        "description": {
-          "hy": "Ամբողջովին կրկնօրինակված active-active բանկային ենթակառուցվածք, որն ապահովում է 99.999% հասանելիություն իրական ժամանակում տվյալների սինխրոնացմամբ:",
-          "en": "Fully redundant active-active banking infrastructure ensuring 99.999% uptime with real-time data synchronization across multiple sites.",
-          "ru": "Полностью избыточная банковская инфраструктура active-active, обеспечивающая 99,999% времени работы с синхронизацией данных в реальном времени."
-        },
-        "tags": {
-          "banking": { "hy": "Բանկային համակարգ", "en": "Banking", "ru": "Банковское дело" },
-          "highAvailability": { "hy": "Բարձր Հասանելիություն", "en": "High Availability", "ru": "Высокая доступность" }
-        }
-      },
-      "nationalSecurity": {
-        "title": {
-          "hy": "Ազգային Անվտանգության Համակարգեր",
-          "en": "National Security Systems",
-          "ru": "Системы Национальной Безопасности"
-        },
-        "description": {
-          "hy": "Համապարփակ անվտանգության ենթակառուցվածք պետական պաշտպանության համար՝ ներառյալ տեսահսկում, մուտքի վերահսկում և ապահով կապ:",
-          "en": "Comprehensive security infrastructure for national defense including surveillance, access control, and secure communications.",
-          "ru": "Комплексная инфраструктура безопасности для государственной обороны, включая видеонаблюдение, контроль доступа и защищенную связь."
-        },
-        "tags": {
-          "security": { "hy": "Անվտանգություն", "en": "Security", "ru": "Безопасность" },
-          "government": { "hy": "Պետական", "en": "Government", "ru": "Государственный" }
-        }
-      }
-    }
-  },
-
-  "vendorsPreview": {
-    "eyebrow": {
-      "hy": "Մատակարարների Էկոհամակարգ",
-      "en": "Vendor Ecosystem",
-      "ru": "Экосистема Вендоров"
-    },
-    "mainTitle": {
-      "hy": "Գլոբալ Տեխնոլոգիական Մատակարարներ",
-      "en": "Global Technology Vendors",
-      "ru": "Глобальные Технологические Вендоры"
-    },
-    "mainDescription": {
-      "hy": "Մենք համագործակցում ենք աշխարհի առաջատար տեխնոլոգիական բրենդների հետ՝ հայկական շուկա բերելու կորպորատիվ մակարդակի լուծումներ, sertificatsvac փորձառություն և առաջադեմ ենթակառուցվածքային հարթակներ։",
-      "en": "We partner with the world's leading technology brands to bring enterprise-grade solutions, certified expertise, and advanced infrastructure platforms to the Armenian market.",
-      "ru": "Мы сотрудничаем с ведущими мировыми технологическими брендами, чтобы поставлять решения корпоративного уровня, сертифицированный опыт и передовые инфраструктурные платформы на армянский рынок."
-    },
-    "features": {
-      "directAccess": {
-        "title": { "hy": "Ուղիղ Հասանելիություն", "en": "Direct Access", "ru": "Прямой Доступ" },
-        "text": {
-          "hy": "Պաշտոնական գործընկերություն գլոբալ արտադրողների հետ, որն ապահովում է վստահելի լուծումներ, աջակցություն և հուսալիություն:",
-          "en": "Official partnerships with global technology manufacturers ensuring trusted solutions, support and reliability.",
-          "ru": "Официальное партнерство с мировыми производителями гарантирует надежные решения, поддержку и стабильность."
-        }
-      },
-      "certifiedExperts": {
-        "title": { "hy": "Որակավորված Մասնագետներ", "en": "Certified Experts", "ru": "Сертифицированные Эксперты" },
-        "text": {
-          "hy": "Մեր ինժեներները անընդհատ կատարելագործում են իրենց հմտությունները պաշտոնական sertifikacman ծրագրերի միջոցով:",
-          "en": "Our engineers continuously improve their skills through official vendor certification programs.",
-          "ru": "Наши инженеры постоянно совершенствуют свои навыки с помощью официальных программ сертификации."
-        }
-      },
-      "completePortfolio": {
-        "title": { "hy": "Ամբողջական Պորտֆոլիո", "en": "Complete Portfolio", "ru": "Полное Портфолио" },
-        "text": {
-          "hy": "Տվյալների կենտրոններից և ամպային հարթակներից մինչև անվտանգության համակարգեր և կորպորատիվ ենթակառուցվածքներ:",
-          "en": "From data centers and cloud platforms to security systems and enterprise infrastructure.",
-          "ru": "От дата-центров и облачных платформ до систем безопасности и корпоративной инфраструктуры."
-        }
-      },
-      "badgeText": {
-        "hy": "Սերտիֆիկացված Տեխնոլոգիա",
-        "en": "Certified Technology",
-        "ru": "Сертифицированная Технология"
-      }
-    },
-    "partnersTitle": {
-      "hy": "Մեր Տեխնոլոգիական Գործընկերները",
-      "en": "Our Technology Partners",
-      "ru": "Наши Технологические Партнеры"
-    },
-    "partnersSubtitle": {
-      "hy": "Սերտիֆիկացված Գլոբալ Տեխնոլոգիական Էկոհամակարգ",
-      "en": "Certified Global Technology Ecosystem",
-      "ru": "Сертифицированная Глобальная Экосистема"
-    },
-    "partnersDescription": {
-      "hy": "Ուսումնասիրեք DigiBase-ի կողմից իրականացվող կարևորագույն նախագծերի հետևում կանգնած տեխնոլոգիական էկոհամակարգը:",
-      "en": "Explore the technology ecosystem behind mission-critical deployments delivered by DigiBase.",
-      "ru": "Изучите технологическую экосистему, стоящую за критически важными проектами, реализуемыми DigiBase."
-    },
-    "cta": {
-      "title": {
-        "hy": "Կառուցելով ապագան տեխնոլոգիական առաջատարների հետ",
-        "en": "Building the future with global technology leaders",
-        "ru": "Строим будущее с мировыми технологическими лидерами"
-      },
-      "description": {
-        "hy": "Մեր ռազմավարական գործընկերների հետ միասին DigiBase-ն ապահովում է անվտանգ, մասշտաբային և ապագային պատրաստ ենթակառուցվածքային լուծումներ:",
-        "en": "Together with our strategic partners, DigiBase delivers secure, scalable and future-ready infrastructure solutions.",
-        "ru": "Вместе с нашими стратегическими партнерами DigiBase предоставляет безопасные, масштабируемые и готовые к будущему инфраструктурные решения."
-      },
-      "button": {
-        "hy": "Սկսել Նախագիծը",
-        "en": "Start a Project",
-        "ru": "Начать Проект"
-      }
-    }
-  },
-
   "common": {
     "getInTouch": {
       "hy": "Կապ հաստատել",
@@ -218,8 +54,8 @@
     "hy": "Հայ",
     "en": "EN",
     "ru": "RU"
-  },
-
+  }
+,
   "clientsExperience": {
     "clients": { "hy": "Հաճախորդներ", "en": "Clients", "ru": "Клиенты" },
     "trustedOrganizations": {
@@ -355,7 +191,6 @@
       "ru": "Экосистема за каждым развертыванием."
     }
   },
-
   "partners": {
     "eyebrow": {
       "hy": "Հաճախորդներ",
@@ -375,6 +210,7 @@
     "description1": {
       "hy": "DigiBase-ը ապահովում է Հայաստանի առաջատար ընկերությունների և պետական հաստատությունների տեխնոլոգիական հուսալիությունը։",
       "en": "DigiBase ensures the technological reliability of Armenia’s leading companies and government institutions.",
+
       "ru": "DigiBase обеспечивает технологическую надежность ведущих компаний и государственных учреждений Армении."
     },
     "description2": {
@@ -427,4 +263,6 @@
       "ru": "Наша команда готова помочь вашей организации спроектировать и внедрить надежную корпоративную инфраструктуру."
     }
   }
+
+ 
 }

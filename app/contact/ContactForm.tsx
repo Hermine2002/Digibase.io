@@ -42,32 +42,37 @@ ${fd.get("message")}
     <main className="relative min-h-screen overflow-hidden bg-white">
       {/* BACKGROUND */}
       <div className="absolute inset-0 bg-[url('/images/contact-bg.jpg')] bg-cover bg-center opacity-10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/80 to-white" />
 
-      {/* HERO SECTION */}
-      <section className="relative border-b border-zinc-200" style={{
-              backgroundImage: "url('/images/partners-globe.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-      >
-        <div className="container-x py-32 md:py-40" >
-          <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#00c050]">
-            {contact.eyebrow[language]}
-          </span>
+     {/* HERO SECTION */}
+<section className="relative border-b border-zinc-200 overflow-hidden">
+  {/* Hetnkari nkar (Globe) */}
+  <div 
+    className="absolute inset-0 z-0 bg-cover bg-center"
+    style={{ backgroundImage: "url('/images/dice-form-expression-contact-us-260nw-2377041407.webp')" }}
+  >
+    {/* Spitak tapancik gradient shert (overlay), vor tarery lav kardacven */}
+    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/55 to-white" />
+  </div>
 
-          <h1 className="mt-6 max-w-4xl text-5xl md:text-7xl font-bold tracking-tight text-black">
-            {contact.heroTitle[language]}{" "}
-            <span className="text-[#00c050]">
-              {contact.heroTitleHighlight[language]}
-            </span>
-          </h1>
+  {/* Bovandakutyun (Content) */}
+  <div className="relative z-10 container-x py-32 md:py-40">
+    <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#00c050]">
+      {contact.eyebrow[language]}
+    </span>
 
-          <p className="mt-8 max-w-3xl text-lg text-zinc-600 leading-relaxed">
-            {contact.heroDescription[language]}
-          </p>
-        </div>
-      </section>
+    <h1 className="mt-6 max-w-4xl text-5xl md:text-7xl font-bold tracking-tight text-black">
+      {contact.heroTitle[language]}{" "}
+      <span className="text-[#00c050]">
+        {contact.heroTitleHighlight[language]}
+      </span>
+    </h1>
+
+    <p className="mt-8 max-w-3xl text-lg text-zinc-600 leading-relaxed">
+      {contact.heroDescription[language]}
+    </p>
+  </div>
+</section>
 
       {/* MAIN CONTENT SECTION */}
       <section className="relative py-24">
@@ -101,11 +106,7 @@ ${fd.get("message")}
               text="+374 12 488888"
             />
 
-            <ContactCard
-              icon={<Building2 className="text-[#00c050]" />}
-              title={contact.info.companyTitle[language]}
-              text="DIGIBASE Infrastructure Solutions"
-            />
+         
 
             {/* MAP */}
             <div className="mt-10 overflow-hidden rounded-[32px] border border-zinc-200 shadow-[0_40px_100px_rgba(0,0,0,.15)] transition duration-500 hover:-translate-y-2">

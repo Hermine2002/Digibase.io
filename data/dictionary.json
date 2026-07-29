@@ -476,126 +476,127 @@
     }
   },
   "contact": {
-    "eyebrow": {
-      "hy": "ԿԱՊ ՄԵԶ ՀԵՏ",
-      "en": "CONTACT US",
-      "ru": "СВЯЗАТЬСЯ С НАМИ"
+  "eyebrow": {
+    "hy": "ԿԱՊ ՄԵԶ ՀԵՏ",
+    "en": "CONTACT US",
+    "ru": "СВЯЗАТЬСЯ С НАМИ"
+  },
+  "heroTitle": {
+    "hy": "Ստեղծենք ձեր տեխնոլոգիական ",
+    "en": "Let’s Shape Your Technological ",
+    "ru": "Создадим ваше технологическое "
+  },
+
+  "heroTitleHighlight": {
+    "hy": "ապագան միասին",
+    "en": "Future Together",
+    "ru": "будущее вместе"
+  },
+  "heroDescription": {
+    "hy": "Ունե՞ք նոր նախագիծ, ցանկանում եք թարմացնել ձեր ՏՏ ենթակառուցվածքը, թե՞ պարզապես հարցեր ունեք։ Գրեք կամ զանգահարեք մեզ. DigiBase-ի թիմը սիրով կօգնի գտնել լավագույն տեխնոլոգիական լուծումը։",
+    "en": "Planning a new project, looking to upgrade your IT infrastructure, or simply have a question? Drop us a line or give us a call. The DigiBase team is ready to help you find the ideal technology solution.",
+    "ru": "Планируете новый проект, хотите модернизировать ИТ-инфраструктуру или у вас просто есть вопросы? Напишите или позвоните нам — команда DigiBase с радостью поможет найти оптимальное технологическое решение."
+  },
+  "officeTitle": {
+    "hy": "Հանդիպենք մեր գրասենյակում",
+    "en": "Visit Our Office",
+    "ru": "Встретимся в нашем офисе"
+  },
+  "officeDescription": {
+    "hy": "Մենք միշտ ուրախ ենք հանդիպել մեր հաճախորդներին ու գործընկերներին։ Կարող եք նախապես պայմանավորվել՝ ձեր նախագիծը տեղում, անձամբ քննարկելու համար։",
+    "en": "We are always happy to meet our clients and partners. You can schedule an appointment in advance to discuss your project with our team in person.",
+    "ru": "Мы всегда рады личным встречам с нашими клиентами и партнерами. Вы можете заранее запланировать визит, чтобы обсудить ваш проект с нашей командой на месте."
+  },
+  "formTitle": {
+    "hy": "Գրեք մեզ",
+    "en": "Drop Us a Message",
+    "ru": "Напишите нам"
+  },
+  "formSubtitle": {
+    "hy": "Լրացրեք հայտը, և մեր թիմը հնարավորինս արագ կապ կհաստատի ձեզ հետ։",
+    "en": "Fill out the form below, and our team will get back to you as shortly as possible.",
+    "ru": "Заполните заявку, и наша команда свяжется с вами в кратчайшие сроки."
+  },
+  "toastSuccess": {
+    "hy": "Բացվում է Ձեր էլ. փոստի ծրագիրը...",
+    "en": "Opening your mail application...",
+    "ru": "Открытие почтового приложения..."
+  },
+  "info": {
+    "addressTitle": {
+      "hy": "Հասցե",
+      "en": "Address",
+      "ru": "Адрес"
     },
-    "heroTitle": {
-      "hy": "Միասին ձևավորենք ձեր",
-      "en": "Let’s Shape Your",
-      "ru": "Сформируем ваше"
+    "address": {
+      "hy": "ՀՀ, ք. Երևան 0019, Մ. Բաղրամյան պող., 20 շենք, բն. 3",
+      "en": "Apt. 3, Bldg. 20, M. Baghramyan Ave., Yerevan 0019, RA",
+      "ru": "РА, г. Ереван 0019, пр. М. Баграмяна, здание 20, кв. 3"
     },
-    "heroTitleHighlight": {
-      "hy": "տեխնոլոգիական ապագան",
-      "en": "Technological Future Together",
-      "ru": "технологическое будущее вместе"
+    "emailTitle": {
+      "hy": "Էլ. հասցե",
+      "en": "Email",
+      "ru": "Эл. почта"
     },
-    "heroDescription": {
-      "hy": "Ծրագրո՞ւմ եք նոր նախագիծ, ցանկանում եք թարմացնե՞լ Ձեր IT ենթակառուցվածքը, թե՞ պարզապես հարցեր ունեք: Գրեք մեզ կամ զանգահարեք: DigiBase թիմը պատրաստ է օգնել Ձեզ գտնել օպտիմալ տեխնոլոգիական լուծումը:",
-      "en": "Planning a new project, looking to upgrade your IT infrastructure, or simply have a question? Drop us a line or give us a call. The DigiBase team is ready to help you find the ideal technology solution.",
-      "ru": "Планируете новый проект, хотите обновить IT-инфраструктуру или у вас просто есть вопрос? Напишите нам или позвоните. Команда DigiBase готова помочь вам найти идеальное технологическое решение."
+    "phoneTitle": {
+      "hy": "Հեռախոս",
+      "en": "Phone",
+      "ru": "Телефон"
     },
-    "officeTitle": {
-      "hy": "Այցելեք մեր գրասենյակ",
-      "en": "Visit Our Office",
-      "ru": "Посетите наш офис"
-    },
-    "officeDescription": {
-      "hy": "Մենք միշտ ուրախ ենք հանդիպել մեր հաճախորդներին և գործընկերներին: Կարող եք նախապես պայմանավորվել՝ մեր թիմի հետ Ձեր նախագիծը անձամբ քննարկելու համար:",
-      "en": "We are always happy to meet our clients and partners. You can schedule an appointment in advance to discuss your project with our team in person.",
-      "ru": "Мы всегда рады встрече с нашими клиентами и партнерами. Вы можете заранее запланировать встречу, чтобы лично обсудить проект с нашей командой."
-    },
-    "formTitle": {
-      "hy": "Ուղարկեք հաղորդագրություն",
-      "en": "Drop Us a Message",
-      "ru": "Отправьте нам сообщение"
-    },
-    "formSubtitle": {
-      "hy": "Լրացրեք ստորև ներկայացված ձևը, և մեր թիմը կապ կհաստատի Ձեզ հետ հնարավորինս շուտ:",
-      "en": "Fill out the form below, and our team will get back to you as shortly as possible.",
-      "ru": "Заполните форму ниже, и наша команда свяжется с вами в кратчайшие сроки."
-    },
-    "toastSuccess": {
-      "hy": "Բացվում է Ձեր էլ. փոստի ծրագիրը...",
-      "en": "Opening your mail application...",
-      "ru": "Открытие почтового приложения..."
-    },
-    "info": {
-      "addressTitle": {
-        "hy": "ՀԱՍՑԵ",
-        "en": "ADDRESS",
-        "ru": "АДРЕС"
-      },
-      "address": {
-        "hy": "ՀՀ, ք. Երևան 0019, Մ. Բաղրամյան պող., 20 շենք, բն. 3",
-        "en": "Apt. 3, Bldg. 20, M. Baghramyan Ave., Yerevan 0019, RA",
-        "ru": "РА, г. Ереван 0019, пр. М. Баграмяна, д. 20, кв. 3"
-      },
-      "emailTitle": {
-        "hy": "ԷԼ. ՓՈՍՏ",
-        "en": "EMAIL",
-        "ru": "ЭЛ. ПОЧТА"
-      },
-      "phoneTitle": {
-        "hy": "ՀԵՌԱԽՈՍ",
-        "en": "PHONE",
-        "ru": "ТЕЛЕФОН"
-      },
-      "companyTitle": {
-        "hy": "ԸՆԿԵՐՈՒԹՅՈՒՆ",
-        "en": "COMPANY",
-        "ru": "КОМПАНИЯ"
-      }
-    },
-    "form": {
-      "fullName": {
-        "hy": "Անուն Ազգանուն",
-        "en": "Full Name",
-        "ru": "Имя Фамилия"
-      },
-      "company": {
-        "hy": "Կազմակերպություն",
-        "en": "Company",
-        "ru": "Компания"
-      },
-      "email": {
-        "hy": "Էլ. փոստի հասցե",
-        "en": "Email Address",
-        "ru": "Адрес электронной почты"
-      },
-      "phone": {
-        "hy": "Հեռախոսահամար",
-        "en": "Phone Number",
-        "ru": "Номер телефона"
-      },
-      "phoneOptional": {
-        "hy": "Հեռախոսահամար (Ոչ պարտադիր)",
-        "en": "Phone Number (Optional)",
-        "ru": "Номер телефона (Необязательно)"
-      },
-      "subject": {
-        "hy": "Թեմա",
-        "en": "Subject",
-        "ru": "Тема"
-      },
-      "message": {
-        "hy": "Ձեր հաղորդագրությունը",
-        "en": "Your Message",
-        "ru": "Ваше сообщение"
-      },
-      "send": {
-        "hy": "Ուղարկել",
-        "en": "Send Message",
-        "ru": "Отправить"
-      },
-      "sending": {
-        "hy": "Ուղարկվում է...",
-        "en": "Sending...",
-        "ru": "Отправка..."
-      }
+    "companyTitle": {
+      "hy": "",
+      "en": "",
+      "ru": ""
     }
   },
+  "form": {
+    "fullName": {
+      "hy": "Անուն, Ազգանուն",
+      "en": "Full Name",
+      "ru": "Имя, Фамилия"
+    },
+    "company": {
+      "hy": "Ընկերություն",
+      "en": "Company",
+      "ru": "Компания"
+    },
+    "email": {
+      "hy": "Էլ. փոստ",
+      "en": "Email Address",
+      "ru": "Эл. почта"
+    },
+    "phone": {
+      "hy": "Հեռախոսահամար",
+      "en": "Phone Number",
+      "ru": "Номер телефона"
+    },
+    "phoneOptional": {
+      "hy": "Հեռախոսահամար (ոչ պարտադիր)",
+      "en": "Phone Number (Optional)",
+      "ru": "Номер телефона (необязательно)"
+    },
+    "subject": {
+      "hy": "Հաղորդագրության թեման",
+      "en": "Subject",
+      "ru": "Тема сообщения"
+    },
+    "message": {
+      "hy": "Ձեր հաղորդագրությունը",
+      "en": "Your Message",
+      "ru": "Ваше сообщение"
+    },
+    "send": {
+      "hy": "Ուղարկել հաղորդագրությունը",
+      "en": "Send Message",
+      "ru": "Отправить сообщение"
+    },
+    "sending": {
+      "hy": "Ուղարկվում է...",
+      "en": "Sending...",
+      "ru": "Отправка..."
+    }
+  }
+},
   
   "vendors": {
     "eyebrow": {
@@ -662,27 +663,27 @@
   "title2": {
     "en": "Lasting Impact",
     "hy": "Կայուն Ազդեցությամբ",
-    "ru": "С Устойчивым Эффектом"
+    "ru": "с долгосрочным эффектом"
   },
   "description1": {
     "en": "We design and implement technology solutions that guarantee the seamless operation and digital evolution of critical enterprise systems.",
-    "hy": "Մենք նախագծում և ներդնում ենք տեխնոլոգիական լուծումներ, որոնք երաշխավորում են կրիտիկական կորպորատիվ համակարգերի անխափան աշխատանքն ու թվային էվոլյուցիան:",
-    "ru": "Мы проектируем и внедряем технологические решения, которые гарантируют бесперебойную работу и цифровую эволюцию критически важных корпоративных систем."
+    "hy": "Մենք նախագծում և ներդնում ենք տեխնոլոգիական լուծումներ, որոնք ապահովում են կազմակերպությունների կարևորագույն համակարգերի անխափանությունն ու թվային զարգացումը։",
+    "ru": "Мы проектируем и внедряем технологические решения, которые обеспечивают бесперебойную работу критически важных систем и цифровое развитие организаций."
   },
   "description2": {
     "en": "Explore DigiBase’s featured implementations, which showcase our engineering capabilities and our ability to deliver precise solutions to complex technical challenges.",
-    "hy": "Բացահայտեք DigiBase-ի ընտրանի նախագծերը, որոնք ցուցադրում են մեր ինժեներական հնարավորությունները և բարդ տեխնիկական մարտահրավերներին ճշգրիտ լուծումներ տալու կարողությունը:",
-    "ru": "Ознакомьтесь с избранными проектами DigiBase, которые демонстрируют наши инженерные возможности и способность находить точные решения сложных технических задач."
+    "hy": "Ծանոթացեք DigiBase-ի իրականացրած առանցքային նախագծերին, որոնք լավագույնս ցույց են տալիս մեր ինժեներական հնարավորություններն ու բարդ խնդիրներին ճշգրիտ լուծումներ տալու կարողությունը։",
+    "ru": "Ознакомьтесь с ключевыми проектами DigiBase, которые наглядно подтверждают наши инженерные возможности и умение находить точные решения для сложных технологических задач."
   },
   "featuredTitle": {
     "en": "Featured Projects",
-    "hy": "Ընտրանի Նախագծեր",
-    "ru": "Избранные Проекты"
+    "hy": "Առանցքային նախագծեր",
+    "ru": "Ключевые проекты"
   },
   "featuredSubtitle": {
     "en": "Discover some of our most significant deployments, highlighting DigiBase’s engineering expertise and commitment to excellence.",
-    "hy": "Բացահայտեք մեր ամենանշանակալի ներդրումները՝ ընդգծելով DigiBase-ի ինժեներական փորձառությունն ու հանձնառությունը գերազանցությանը:",
-    "ru": "Откройте для себя наши наиболее значимые внедрения, подчеркивающие инженерный опыт DigiBase и стремление к совершенству."
+    "hy": "Ծանոթացեք մեր իրականացրած առավել նշանակալի նախագծերին, որոնք փաստում են DigiBase-ի ինժեներական հնարավորություններն ու բարձր որակ ապահովելու հանձնառությունը։",
+    "ru": "Узнайте больше о наших наиболее значимых внедрениях, отражающих экспертизу DigiBase и наше стремление к высоким стандартам качества."
   },
   "technologiesLabel": {
     "en": "Technologies",

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import dictionary from "@/data/dictionary.json"; // Քո JSON ֆայլի ուղին
+import dictionary from "@/data/dictionary.json"; 
 
 type Language = "hy" | "en" | "ru";
 

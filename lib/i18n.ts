@@ -1,4 +1,4 @@
-import translations from "@/locales/translations.json";
+import translations from "@/data/dictionary.json";
 
 type Language = "hy" | "en" | "ru";
 
