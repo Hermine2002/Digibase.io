@@ -9,10 +9,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ABOUT_MODEL_PATH = "/models/modelToUsed.glb";
-const ABOUT_MODEL_PATH2 = "public/models/security_camera.glb";
-const ABOUT_MODEL_PATH3 = "/models/server.glb";
-useGLTF.preload(ABOUT_MODEL_PATH);
+
+const ABOUT_MODEL_PATH2 = "/models/camera.glb";
+
+useGLTF.preload(ABOUT_MODEL_PATH2);
 
 function BrandModel({
   scrollProgress,
@@ -21,7 +21,7 @@ function BrandModel({
   scrollProgress: React.MutableRefObject<number>;
   activeIndexRef: React.MutableRefObject<number>;
 }) {
-  const { scene } = useGLTF(ABOUT_MODEL_PATH);
+  const { scene } = useGLTF(ABOUT_MODEL_PATH2);
   const cloned = useMemo(() => scene.clone(true), [scene]);
   const groupRef = useRef<THREE.Group>(null);
   const currentX = useRef(0);
@@ -46,9 +46,9 @@ function BrandModel({
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -3]}>
+    <group ref={groupRef} position={[0, 0, 0]}>
       <Center>
-        <primitive object={cloned} scale={1.6} />
+        <primitive object={cloned} scale={0.03} />
       </Center>
     </group>
   );
@@ -84,7 +84,7 @@ export function AboutBackdrop3D({
     <Canvas
       camera={{ position: [0, 0, 9], fov: 45 }}
       gl={{ antialias: true, alpha: true }}
-      dpr={[1, 1.5]}
+      dpr={[1, 0.5]}
       style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0 }}
     >
       <Suspense fallback={null}>
