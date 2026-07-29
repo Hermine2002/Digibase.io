@@ -10,38 +10,43 @@
     "getInTouch": { "hy": "Կապ հաստատել", "en": "Get in Touch", "ru": "Связаться" }
   },
 
-  "hero": {
-    "badge": {
-      "hy": "Ձեռնարկատիրական IT ենթակառուցվածքային լուծումներ",
-      "en": "Enterprise IT Infrastructure Solutions",
-      "ru": "Корпоративные IT решения инфраструктуры"
-    },
-    "title": {
-      "hy": "Վաղվա թվային հիմքի կառուցում",
-      "en": "Building the Digital Foundation of Tomorrow",
-      "ru": "Строим цифровой фундамент завтрашнего дня"
-    },
-    "description": {
-      "hy": "DigiBase-ը մատուցում է ժամանակակից տվյալների կենտրոնների ենթակառուցվածք, ամպային լուծումներ և ձեռնարկատիրական անվտանգության համակարգեր, որոնք ապահովում են Հայաստանի թվային տրանսֆորմացիան։",
-      "en": "DigiBase delivers cutting-edge data center infrastructure, cloud solutions, and enterprise security systems that power Armenia's digital transformation.",
-      "ru": "DigiBase предоставляет передовую инфраструктуру дата-центров, облачные решения и системы корпоративной безопасности, которые обеспечивают цифровую трансформацию Армении."
-    },
-    "ctaPrimary": {
-      "hy": "Կապ հաստատել",
-      "en": "Get in Touch",
-      "ru": "Связаться с нами"
-    },
-    "ctaSecondary": {
-      "hy": "Դիտել լուծումները",
-      "en": "View Solutions",
-      "ru": "Посмотреть решения"
-    },
-    "scroll": {
-      "hy": "Ուղևորվեք ներքև",
-      "en": "Scroll to explore",
-      "ru": "Прокрутите, чтобы изучить"
-    }
+ "hero": {
+  "badge": {
+    "hy": "Բարձր տեխնոլոգիական ինտեգրացիա և անվտանգություն",
+    "en": "High-Tech Integration and Security",
+    "ru": "Высокотехнологичная интеграция и безопасность"
   },
+  "badgeSubTilile":{
+     "hy": "անվտանգություն",
+    "en": "Security",
+    "ru": "безопасность"
+    },
+  "title": {
+    "hy": "Բարձր տեխնոլոգիական ինտեգրացիա և",
+    "en": "High-Tech Integration and",
+    "ru": "Высокотехнологичная интеграция и"
+  },
+  "description": {
+    "hy": "DigiBase-ը ապահովում է պետական և կորպորատիվ հատվածների ՏՏ ենթակառուցվածքների հուսալիությունն ու պաշտպանվածությունը։",
+    "en": "DigiBase ensures the reliability and protection of IT infrastructure for government and corporate sectors.",
+    "ru": "DigiBase обеспечивает надежность и защиту ИТ-инфраструктуры государственного и корпоративного секторов."
+  },
+  "ctaPrimary": {
+    "hy": "Սկսել համագործակցությունը",
+    "en": "Start Partnership",
+    "ru": "Начать сотрудничество"
+  },
+  "ctaSecondary": {
+    "hy": "",
+    "en": "",
+    "ru": ""
+  },
+  "scroll": {
+    "hy": "Ուղևորվեք ներքև",
+    "en": "Scroll to explore",
+    "ru": "Прокрутите, чтобы изучить"
+  }
+},
 
   "solutionsPreview": {
     "eyebrow": {
@@ -431,40 +436,39 @@
     "ru": "Мы подходим к каждому проекту с одинаковой ответственностью, стремясь не просто внедрить надежные системы, но и построить долгосрочное партнерство, которое продолжается и после завершения проекта. Доверие клиентов — наше главное достижение."
   },
   "trustCards": {
-    "enterprise": {
-      "title": {
-        "hy": "",
-        "en": "",
-        "ru": ""
-      },
-      "text": {
-        "hy": "",
-        "en": "",
-        "ru": ""
-      }
-    },
+   "enterprise": { 
+        "title": { 
+        "hy": "Խոշոր ընկերություններ",
+         "en": "Enterprise Clients", 
+         "ru": "Корпоративные клиенты" 
+         }, 
+        "text": { 
+         "hy": "Բանկերի, կորպորացիաների և կազմակերպությունների համար առաքելության համար կարևոր ենթակառուցվածքային լուծումներ։",
+          "en": "Supporting banks, corporations and organizations with mission-critical infrastructure solutions.", 
+          "ru": "Поддержка банков, корпораций и организаций с критически важными инфраструктурными решениями." 
+          } 
+        },
     "security": {
-      "title": {
-        "hy": "",
-        "en": "",
-        "ru": ""
-      },
-      "text": {
-        "hy": "",
-        "en": "",
-        "ru": ""
-      }
+     "title": { 
+        "hy": "Հուսալի համակարգեր",
+         "en": "Reliable Systems", 
+         "ru": "Надежные системы" }, 
+    "text": { 
+        "hy": "Ապահով հարթակների նախագծում, որոնք երաշխավորում են հասանելիություն, պաշտպանություն և գործառնական արդյունավետություն։", 
+        "en": "Designing secure platforms that guarantee availability, protection and operational efficiency.",
+         "ru": "Проектирование безопасных платформ, гарантирующих доступность, защиту и операционную эффективность."
+         }
     },
     "team": {
       "title": {
-        "hy": "",
-        "en": "",
-        "ru": ""
+       "hy": "Երկարաժամկետ համագործակցություն",
+        "en": "Long-Term Partnership", 
+        "ru": "Долгосрочное партнерство"
       },
       "text": {
-        "hy": "",
-        "en": "",
-        "ru": ""
+            "hy": "Համատեղ աշխատանք հաճախորդների հետ շարունակական նորարարության և տեխնոլոգիական զարգացման միջոցով։", 
+            "en": "Working together with customers through continuous innovation and technology evolution.",
+             "ru": "Совместная работа с клиентами через непрерывные инновации и технологическое развитие."
       }
     }
   },
@@ -800,22 +804,8 @@
     "en": "All rights reserved.",
     "hy": "Բոլոր իրավունքները պաշտպանված են։",
     "ru": "Все права защищены."
-  },
-  "privacy": {
-    "en": "Privacy Policy",
-    "hy": "Գաղտնիության քաղաքականություն",
-    "ru": "Политика конфиденциальности"
-  },
-  "terms": {
-    "en": "Terms of Service",
-    "hy": "Ծառայության պայմաններ",
-    "ru": "Условия обслуживания"
-  },
-  "compliance": {
-    "en": "Compliance Statement",
-    "hy": "Համապատասխանության հայտարարություն",
-    "ru": "Заявление о соответствии"
   }
+
 },
 "compliancePage": {
   "mainTitle": {

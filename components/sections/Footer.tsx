@@ -128,16 +128,13 @@ export function Footer() {
           {/* Bottom Bar */}
           <div className="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
             <p>
-              & copy; {new Date().getFullYear()} DigiBase. {f.copyright?.[language] || "All rights reserved."}
-            </p>
+             {new Date().getFullYear()} DigiBase. {f.copyright?.[language] || "All rights reserved."}
 
+             
+            </p>
+             
             <div className="flex flex-wrap gap-6">
-              <Link href="/privacy" className="hover:text-zinc-300 transition-colors">
-                {f.privacy?.[language] || "Privacy Policy"}
-              </Link>
-              <Link href="/terms" className="hover:text-zinc-300 transition-colors">
-                {f.terms?.[language] || "Terms of Service"}
-              </Link>
+             
               <Link href="/compliance" className="hover:text-zinc-300 transition-colors">
                 {f.compliance?.[language] || "Compliance Statement"}
               </Link>
