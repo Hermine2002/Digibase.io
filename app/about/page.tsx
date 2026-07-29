@@ -36,7 +36,7 @@ function MemberCard({
   if (isLeader) {
     // ՂԵԿԱՎԱՐՆԵՐԻ ՔԱՐՏ (Կողքից 3D բացվող պատուհանով)
     return (
-      <div className="group relative z-10 [perspective:1000px]">
+      <div className="group relative z-10 [perspective:1000px] p-4">
         <div className="relative flex flex-col items-center rounded-3xl border border-zinc-200/90 bg-gradient-to-b from-white via-white to-[#00c050]/5 p-6 text-center backdrop-blur-md transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-[1.02] group-hover:border-[#00c050]/50 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05)] group-hover:shadow-[0_20px_40px_-10px_rgba(0,192,80,0.2)]">
           
           {/* Avatar / Photo */}
@@ -138,18 +138,12 @@ export default function AboutPage() {
       <div className="fixed inset-0 -z-10 opacity-30" />
       <div className="fixed inset-0 -z-10 bg-white/70" />
 
-      <div className="relative z-10">
+      <div className="relative z-10 ">
         {/* HERO */}
         <AboutSectionReveal index={0} activeIndexRef={activeIndexRef}>
-          <section
-            className="border-b border-border"
-            style={{
-              backgroundImage: "url('/images/Gemini_Generated_Image_iulekuiulekuiule.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="container-x py-24 md:py-32 bg-white/70 w-100 rounded-3xl border border-border shadow-2xl overflow-hidden h-full">
+          <section className="border-b border-border" >
+                <HeroScene />
+            <div className="container-x py-24 md:py-32 bg-white/90 w-100 rounded-3xl border border-border shadow-2xl overflow-hidden h-full">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#00c050]/20 bg-[#00c050]/10 px-4 py-1.5 backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#00c050] animate-pulse" />
                 <span className="text-xs uppercase tracking-[0.3em] text-[#00c050] font-medium">
@@ -157,19 +151,19 @@ export default function AboutPage() {
                 </span>
               </div>
 
-              <h1 className="mt-8 max-w-3xl text-5xl font-bold tracking-tight md:text-6xl leading-[1.05] text-black">
+              <h1 className="mt-8 max-w-3xl text-5xl font-bold tracking-tight md:text-6xl leading-[1.05] text-black p-4">
                 {ab.heroTitle[language]}
               </h1>
 
-              <p className="mt-8 max-w-2xl text-lg text-[#00c050]">
+              <p className="mt-8 max-w-2xl text-lg font-bold text-[#00c050] p-4">
                 {ab.heroSubtitle1[language]}
               </p>
 
-              <p className="mt-6 max-w-2xl text-lg text-zinc-600">
+              <p className="mt-6 max-w-2xl text-lg font-bold text-[#000000] p-4">
                 {ab.heroSubtitle2[language]}
               </p>
 
-              <div className="mt-10 h-px w-24 bg-gradient-to-r from-[#00c050]/60 to-transparent" />
+              <div className="mt-10 h-px w-24 bg-gradient-to-r from-[#00c050]/20 to-transparent" />
             </div>
           </section>
         </AboutSectionReveal>

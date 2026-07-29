@@ -2,26 +2,21 @@
 
 import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import * as THREE from "three";
 import { clients } from "@/data/clients";
-import GalaxyAnimationOrbit from "../3d/GalaxyOrbitExperience";
 import { useLanguage } from "@/context/LanguageContext";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// ─── Galaxy Orbit Configuration ───
-const ORBIT_RADIUS_X = 340;
-const ORBIT_RADIUS_Z = 220;
-const ORBIT_RADIUS_Y = 70;
-const LOOPS = 2.2;
-const TILT_ANGLE = 0.3;
-const EASING = 0.055;
+// ─── Galaxy Orbit Configuration (Ավելի լայն ու ընդարձակ էկրանի համար) ───
+const ORBIT_RADIUS_X = 520;
+const ORBIT_RADIUS_Z = 340;
+const ORBIT_RADIUS_Y = 90;
+const TILT_ANGLE = 0.25;
+const AUTO_ROTATE_SPEED = 0.018; 
 
 export function ClientsExperience() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const scrollProgress = useRef(0);
   const currentRotation = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const lastActive = useRef(0);
@@ -30,34 +25,130 @@ export function ClientsExperience() {
   const { language, t } = useLanguage();
   const pp = t.partners;
 
-  // Scroll Trigger
+  // Three.js 3D ֆոնային էֆեկտ
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.2,
-        onUpdate: (self) => {
-          scrollProgress.current = self.progress;
-        },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
+    const container = containerRef.current;
+    if (!container) return;
+
+    let camera: THREE.PerspectiveCamera;
+    let scene: THREE.Scene;
+    let renderer: THREE.WebGLRenderer;
+    const spheres: THREE.Mesh[] = [];
+    let animationFrameId: number;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let windowHalfX = (container.clientWidth || window.innerWidth) / 2;
+    let windowHalfY = (container.clientHeight || 750) / 2;
+
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || 750;
+
+    camera = new THREE.PerspectiveCamera(60, width / height, 0.01, 100);
+    camera.position.z = 3;
+
+    scene = new THREE.Scene();
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0xffffff, 3, 50); // Սպիտակ լույսի ակցենտ
+    pointLight.position.set(2, 2, 2);
+    scene.add(pointLight);
+
+    const secondLight = new THREE.PointLight(0x38bdf8, 2, 50);
+    secondLight.position.set(-2, -2, 2);
+    scene.add(secondLight);
+
+    const geometry = new THREE.SphereGeometry(0.1, 32, 32);
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x10b981,
+      roughness: 0.2,
+      metalness: 0.85,
+    });
+
+    for (let i = 0; i < 150; i++) {
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.x = Math.random() * 10 - 5;
+      mesh.position.y = Math.random() * 10 - 5;
+      mesh.position.z = Math.random() * 10 - 5;
+      mesh.scale.setScalar(Math.random() * 1.5 + 0.5);
+      scene.add(mesh);
+      spheres.push(mesh);
+    }
+
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+
+    const onDocumentMouseMove = (event: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const clientX = event.clientX - rect.left;
+      const clientY = event.clientY - rect.top;
+      mouseX = (clientX - windowHalfX) / 100;
+      mouseY = (clientY - windowHalfY) / 100;
+    };
+
+    container.addEventListener("mousemove", onDocumentMouseMove);
+
+    const animateThree = () => {
+      animationFrameId = requestAnimationFrame(animateThree);
+      const timer = 0.0001 * Date.now();
+
+      camera.position.x += (mouseX - camera.position.x) * 0.05;
+      camera.position.y += (-mouseY - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      for (let i = 0, il = spheres.length; i < il; i++) {
+        const sphere = spheres[i];
+        sphere.position.x = 5 * Math.cos(timer + i);
+        sphere.position.y = 5 * Math.sin(timer + i * 1.1);
+        sphere.rotation.x += 0.01;
+        sphere.rotation.y += 0.01;
+      }
+
+      renderer.render(scene, camera);
+    };
+
+    animateThree();
+
+    const handleResize = () => {
+      if (!container) return;
+      windowHalfX = container.clientWidth / 2;
+      windowHalfY = container.clientHeight / 2;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      container.removeEventListener("mousemove", onDocumentMouseMove);
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
+      if (renderer.domElement && container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+      renderer.dispose();
+    };
   }, []);
 
-  // Galaxy Animation
+  // Քարտերի պտտման անիմացիա
   useEffect(() => {
-    const tick = () => {
-      const targetRotation = scrollProgress.current * Math.PI * 2 * LOOPS;
-      currentRotation.current +=
-        (targetRotation - currentRotation.current) * EASING;
+    const bgTween = gsap.to(bgRef.current, {
+      scale: 1.18,
+      duration: 6,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
 
-      if (bgRef.current) {
-        const scale = 1.05 + scrollProgress.current * 0.18;
-        const translateY = scrollProgress.current * -45;
-        bgRef.current.style.transform = `translateY(${translateY}px) scale(${scale})`;
-      }
+    const tick = () => {
+      currentRotation.current += AUTO_ROTATE_SPEED;
 
       let frontIndex = 0;
       let maxDepth = -Infinity;
@@ -81,11 +172,11 @@ export function ClientsExperience() {
         const normalizedDepth =
           (depth + ORBIT_RADIUS_Z) / (ORBIT_RADIUS_Z * 2);
 
-        const scaleCard = 0.48 + normalizedDepth * 0.62;
-        const opacity = 0.22 + normalizedDepth * 0.78;
-        const blur = (1 - normalizedDepth) * 4.5;
-        const rotateY = Math.sin(angle) * -22;
-        const rotateX = Math.cos(angle) * 12;
+        const scaleCard = 0.52 + normalizedDepth * 0.58;
+        const opacity = 0.2 + normalizedDepth * 0.8;
+        const blur = (1 - normalizedDepth) * 3.5;
+        const rotateY = Math.sin(angle) * -18;
+        const rotateX = Math.cos(angle) * 10;
 
         if (depth > maxDepth) {
           maxDepth = depth;
@@ -110,44 +201,45 @@ export function ClientsExperience() {
     };
 
     gsap.ticker.add(tick);
-    return () => gsap.ticker.remove(tick);
+
+    return () => {
+      gsap.ticker.remove(tick);
+      bgTween.kill();
+    };
   }, [total]);
 
   return (
-    <div
-      ref={sectionRef}
-      className="relative"
-      style={{ height: `${Math.max(total * 70, 400)}vh` }}
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-zinc-50">
-        {/* Animated Galaxy Background */}
+    <div className="relative w-full h-[650px] md:h-[750px] overflow-hidden ">
+      <div className="relative h-full w-full overflow-hidden bg-transparent">
+        {/* Dark Background Image */}
         <div
           ref={bgRef}
-          className="absolute inset-0 will-change-transform opacity-50"
+          className="absolute inset-0 will-change-transform opacity-50 pointer-events-none"
           style={{
-            backgroundImage: "url('/images/partners-globe.png')",
+            backgroundImage: "url('/images/20260729_2258_image.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
 
-        {/* Star Field */}
-        <div className="absolute inset-0 pointer-events-none">
-          <StarField />
-        </div>
-        <GalaxyAnimationOrbit
-          particleCount={1000}
-          starColor="#e6eff1"
-          orbitRadius={600}
+        {/* Three.js 3D Interactive Canvas */}
+        <div
+          ref={containerRef}
+          className="absolute inset-0 z-10"
         />
 
-        {/* Galaxy Cards */}
+        {/* Star Field */}
+        <div className="absolute inset-0 pointer-events-none opacity-50">
+          <StarField />
+        </div>
+
+        {/* Galaxy Cards (Full Screen Wide & Dark Transparent with White Accent) */}
         <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ perspective: "1200px" }}
+          className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none w-full"
+          style={{ perspective: "1500px" }}
         >
           <div
-            className="relative"
+            className="relative pointer-events-auto"
             style={{
               transformStyle: "preserve-3d",
               width: 0,
@@ -162,46 +254,51 @@ export function ClientsExperience() {
                   cardRefs.current[i] = el;
                 }}
                 className={`
-                  absolute -translate-x-1/2 -translate-y-1/2 w-[260px] h-[160px] rounded-2xl
-                  bg-[#000000]/90 bg-transparent backdrop-blur-xl border border-white/40
-                  shadow-[0_8px_32px_rgba(0,0,0,0.12),0_0_0_1px_rgba(255,255,255,0.5)]
-                  flex items-center justify-center p-6 transition-shadow duration-500
+                  absolute -translate-x-1/2 -translate-y-1/2 w-[300px] h-[230px] rounded-2xl
+                  bg-black/30 backdrop-blur-md border border-white/15
+                  shadow-[0_8px_32px_rgba(0,0,0,0.5)]
+                  flex flex-col items-center justify-center p-5 gap-3 transition-all duration-300
                   ${
                     i === activeIndex
-                      ? "shadow-[0_12px_48px_rgba(16,185,129,0.25),0_0_0_1px_rgba(16,185,129,0.3)]"
+                      ? "bg-black/65 shadow-[0_12px_48px_rgba(255,255,255,0.25),0_0_0_2px_rgba(255,255,255,0.9)] border-white"
                       : ""
                   }
                 `}
               >
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-w-full max-h-full object-contain"
-                  draggable={false}
-                />
-                {i === activeIndex && (
-                  <div className="absolute inset-0 rounded-2xl bg-emerald-500/5 pointer-events-none" />
-                )}
+                {/* Լոգո */}
+                <div className="w-full h-16 flex items-center justify-center px-4">
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-25 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]"
+                    draggable={false}
+                  />
+                </div>
+
+                {/* Լոգոյի անունը */}
+                <span className="text-xs md:text-sm font-semibold tracking-wide text-white/90 text-center truncate max-w-full px-2">
+                  {client.name}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Section Header */}
-        <div className="absolute top-0 left-0 right-0 pointer-events-none z-20">
-          <div className="container-x pt-16 md:pt-20 flex flex-col items-center text-center">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black">
+        <div className="absolute top-0 left-0 right-0 pointer-events-none z-30">
+          <div className="container-x pt-12 md:pt-16 flex flex-col items-center text-center">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
               {pp.clientsTitle[language]}
             </h2>
 
-            <p className="text-3xl md:text-5xl font-bold  text-[#00c050]">
+            <p className="text-3xl md:text-5xl font-bold text-[#00c050] mt-2">
               {pp.clientsSubtitle[language]}
             </p>
           </div>
         </div>
 
-        {/* Active Client Info & Dots */}
-        <div className="absolute bottom-10 left-0 right-0 flex flex-col items-center gap-3 pointer-events-none z-20">
+        {/* Active Client Dots */}
+        <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 pointer-events-none z-30">
           <div className="flex gap-2 items-center">
             {clients.map((_, i) => {
               const dist = Math.abs(i - activeIndex);
@@ -211,10 +308,10 @@ export function ClientsExperience() {
                   key={i}
                   className={`rounded-full transition-all duration-500 ${
                     i === activeIndex
-                      ? "w-10 h-2.5 bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.5)]"
+                      ? "w-10 h-2.5 bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]"
                       : isNear
-                      ? "w-2.5 h-2.5 bg-emerald-300/60"
-                      : "w-1.5 h-1.5 bg-zinc-300/40"
+                      ? "w-2.5 h-2.5 bg-white/50"
+                      : "w-1.5 h-1.5 bg-zinc-700"
                   }`}
                 />
               );
@@ -223,9 +320,9 @@ export function ClientsExperience() {
         </div>
 
         {/* Vignette */}
-        <div className="absolute inset-0 pointer-events-none z-10">
-          <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-white/90 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white/90 to-transparent" />
+        <div className="absolute inset-0 pointer-events-none z-20">
+          <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-zinc-950 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-zinc-950 to-transparent" />
         </div>
       </div>
     </div>
@@ -250,7 +347,7 @@ function StarField() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const stars = Array.from({ length: 150 }, () => ({
+    const stars = Array.from({ length: 120 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       radius: Math.random() * 1.5,
@@ -267,7 +364,7 @@ function StarField() {
         }
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${Math.abs(star.alpha) * 0.6})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha) * 0.5})`;
         ctx.fill();
       });
       animationFrameId = requestAnimationFrame(render);

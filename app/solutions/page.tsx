@@ -27,7 +27,7 @@ function ProjectCard({
   const sp = t.solutions;
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" >
       <div className="relative container-x py-28 md:py-36">
         <div className="grid gap-20 lg:grid-cols-12 items-center">
           <HeroAnimation />
@@ -35,11 +35,11 @@ function ProjectCard({
           {/* TEXT SIDE */}
           <div
             ref={textRef}
-            className={`lg:col-span-5 space-y-8 rounded-3xl border border-zinc-200 bg-white/90 backdrop-blur-md p-8 md:p-10 shadow-xl ${
+            className={`lg:col-span-5 space-y-8 rounded-3xl border border-zinc-200 bg-white/90 backdrop-blur-md  md:p-10 shadow-xl ${
               textFirst ? "lg:order-1" : "lg:order-2"
             }`}
           >
-            <span className="inline-flex rounded-full border border-[#00c050]/20 bg-[#00c050]/10 px-4 py-2 text-xs uppercase tracking-widest text-[#00c050] font-medium">
+            <span className="inline-flex rounded-full border border-[#00c050]/20 bg-[#00c050]/10 px-4 py-2 text-xs uppercase tracking-widest text-[#00c050] font-medium ml-2">
               {project.tag}
             </span>
 
@@ -47,7 +47,7 @@ function ProjectCard({
               {project.title}
             </h2>
 
-            <p className="text-sm text-zinc-500">{project.client}</p>
+            <p className="text-sm text-zinc-500 ml-4">{project.client}</p>
             <p className="text-lg leading-relaxed text-zinc-600">{project.description}</p>
 
             <div>

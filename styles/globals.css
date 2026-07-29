@@ -38,6 +38,7 @@
     @apply bg-white text-digibase-black font-sans;
     overflow-x: hidden;
     font-family: var(--font-family);
+    
   }
 
   ::selection {
