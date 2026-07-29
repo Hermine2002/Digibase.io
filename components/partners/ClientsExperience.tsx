@@ -194,7 +194,7 @@ export function ClientsExperience() {
               {pp.clientsTitle[language]}
             </h2>
 
-            <p className="mt-3 max-w-2xl text-base md:text-lg  text-[#00c050]">
+            <p className="text-3xl md:text-5xl font-bold  text-[#00c050]">
               {pp.clientsSubtitle[language]}
             </p>
           </div>

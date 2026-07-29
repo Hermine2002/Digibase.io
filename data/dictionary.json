@@ -380,101 +380,101 @@
       }
     }
   },
-  "partners": {
-    "eyebrow": {
-      "hy": "ՀԱՃԱԽՈՐԴՆԵՐ",
-      "en": "CUSTOMERS",
-      "ru": "КЛИЕНТЫ"
-    },
-    "title": {
-      "hy": "Համագործակցություններ հիմնված",
-      "en": "Partnerships Built on",
-      "ru": "Партнерства, построенные на"
-    },
-    "trust": {
-      "hy": "վստահության վրա",
-      "en": "Trust",
-      "ru": "доверии"
-    },
-    "description1": {
-      "hy": "DigiBase-ը ապահովում է Հայաստանի առաջատար ընկերությունների և պետական հաստատությունների տեխնոլոգիական հուսալիությունը։",
-      "en": "DigiBase ensures the technological reliability of Armenia’s leading companies and government institutions.",
-      "ru": "DigiBase обеспечивает технологическую надежность ведущих компаний и государственных учреждений Армении."
-    },
-    "description2": {
-      "hy": "Մեր հաճախորդների թվում են ֆինանսական հաստատություններ, պետական մարմիններ, կրթական կենտրոններ և խոշոր կորպորացիաներ։",
-      "en": "Our clientele includes financial institutions, public sector entities, educational centers, and large corporations.",
-      "ru": "Наша клиентура включает финансовые учреждения, государственные органы, образовательные центры и крупные корпорации."
-    },
-    "description3": {
-      "hy": "Մեր հաճախորդների վստահությունը մեր ամենամեծ ձեռքբերումն է։",
-      "en": "The trust of our customers is our greatest achievement.",
-      "ru": "Доверие наших клиентов — наше главное достижение."
-    },
-    "trustCards": {
-      "enterprise": {
-        "title": {
-          "hy": "Խոշոր ընկերություններ",
-          "en": "Enterprise Clients",
-          "ru": "Корпоративные клиенты"
-        },
-        "text": {
-          "hy": "Բանկերի, կորպորացիաների և կազմակերպությունների համար առաքելության համար կարևոր ենթակառուցվածքային լուծումներ։",
-          "en": "Supporting banks, corporations and organizations with mission-critical infrastructure solutions.",
-          "ru": "Поддержка банков, корпораций и организаций с критически важными инфраструктурными решениями."
-        }
+ "partners": {
+  "eyebrow": {
+    "hy": "ՀԱՃԱԽՈՐԴՆԵՐ",
+    "en": "CUSTOMERS",
+    "ru": "КЛИЕНТЫ"
+  },
+  "title": {
+    "hy": "Գործընկերություն՝ հիմնված",
+    "en": "Partnerships Built on",
+    "ru": "Партнерство, основанное на"
+  },
+  "trust": {
+    "hy": "վստահության վրա",
+    "en": "Trust",
+    "ru": "доверии"
+  },
+  "description1": {
+    "hy": "DigiBase-ն ապահովում է Հայաստանի առաջատար ընկերությունների և պետական կառույցների տեխնոլոգիական հուսալիությունը։ Մենք մշակում ենք լուծումներ, որոնք պաշտպանում են տվյալները, անխափան դարձնում աշխատանքն ու օգնում բիզնեսին զարգանալ։",
+    "en": "DigiBase ensures the technological reliability of Armenia’s leading companies and government institutions. We engineer solutions that secure data, optimize operations, and drive business efficiency.",
+    "ru": "DigiBase обеспечивает технологическую надежность ведущих компаний и государственных учреждений Армении. Мы разрабатываем решения, которые защищают данные, делают работу бесперебойной и помогают бизнесу развиваться."
+  },
+  "description2": {
+    "hy": "Մեր հաճախորդների թվում են ֆինանսական հաստատություններ, պետական կառույցներ, կրթական կենտրոններ, ինչպես նաև խոշոր կորպորացիաներ։ Նրանցից յուրաքանչյուրն ունի յուրահատուկ մարտահրավերներ և որակի բարձր պահանջներ։",
+    "en": "Our clientele includes financial institutions, public sector entities, educational centers, and large corporations—each with unique challenges and high standards for quality.",
+    "ru": "В числе наших клиентов — финансовые институты, государственные организации, образовательные центры, а также крупные корпорации. У каждого из них свои уникальные вызовы и высокие требования к качеству."
+  },
+  "description3": {
+    "hy": "Մենք նույն պատասխանատվությամբ ենք մոտենում ամեն մի նախագծի՝ նպատակ ունենալով ոչ միայն ներդնել հուսալի համակարգեր, այլև կառուցել երկարաժամկետ գործընկերություն, որը շարունակվում է նախագծի ավարտից հետո էլ։ Հաճախորդների վստահությունը մեր ամենամեծ ձեռքբերումն է։",
+    "en": "We approach every project with the same level of responsibility. Our goal is not just to deploy reliable systems, but to build long-term partnerships that extend far beyond project implementation. The trust of our customers is our greatest achievement.",
+    "ru": "Мы подходим к каждому проекту с одинаковой ответственностью, стремясь не просто внедрить надежные системы, но и построить долгосрочное партнерство, которое продолжается и после завершения проекта. Доверие клиентов — наше главное достижение."
+  },
+  "trustCards": {
+    "enterprise": {
+      "title": {
+        "hy": "",
+        "en": "",
+        "ru": ""
       },
-      "security": {
-        "title": {
-          "hy": "Հուսալի համակարգեր",
-          "en": "Reliable Systems",
-          "ru": "Надежные системы"
-        },
-        "text": {
-          "hy": "Ապահով հարթակների նախագծում, որոնք երաշխավորում են հասանելիություն, պաշտպանություն և գործառնական արդյունավետություն։",
-          "en": "Designing secure platforms that guarantee availability, protection and operational efficiency.",
-          "ru": "Проектирование безопасных платформ, гарантирующих доступность, защиту и операционную эффективность."
-        }
-      },
-      "team": {
-        "title": {
-          "hy": "Երկարաժամկետ համագործակցություն",
-          "en": "Long-Term Partnership",
-          "ru": "Долгосрочное партнерство"
-        },
-        "text": {
-          "hy": "Համատեղ աշխատանք հաճախորդների հետ շարունակական նորարարության և տեխնոլոգիական զարգացման միջոցով։",
-          "en": "Working together with customers through continuous innovation and technology evolution.",
-          "ru": "Совместная работа с клиентами через непрерывные инновации и технологическое развитие."
-        }
+      "text": {
+        "hy": "",
+        "en": "",
+        "ru": ""
       }
     },
-    "clientsTitle": {
-      "hy": "Կազմակերպություններ, որոնք ընտրել են DigiBase-ը",
-      "en": "Organizations that chose DigiBase",
-      "ru": "Организации, которые выбрали DigiBase"
+    "security": {
+      "title": {
+        "hy": "",
+        "en": "",
+        "ru": ""
+      },
+      "text": {
+        "hy": "",
+        "en": "",
+        "ru": ""
+      }
     },
-    "clientsSubtitle": {
-      "hy": "Հուսալի կազմակերպություններ, որոնք ապավինում են DigiBase-ին որպես անվտանգ, մասշտաբային և ապագայի պատրաստ ենթակառուցվածքի գործընկեր։",
-      "en": "Trusted organizations that rely on DigiBase as their technology partner for secure, scalable and future-ready infrastructure.",
-      "ru": "Надежные организации, которые полагаются на DigiBase как на технологического партнера для безопасной, масштабируемой и готовой к будущему инфраструктуры."
-    },
-    "clientsDescription": {
-      "hy": "Trusted organizations that rely on DigiBase as their technology partner.",
-      "en": "Trusted organizations that rely on DigiBase as their technology partner.",
-      "ru": "Надежные организации, которые полагаются на DigiBase."
-    },
-    "ctaTitle": {
-      "hy": "Պատրաստ եք կառուցել ձեր հաջորդ տեխնոլոգիական լուծումը?",
-      "en": "Ready to build your next technology solution?",
-      "ru": "Готовы построить следующее технологическое решение?"
-    },
-    "ctaDescription": {
-      "hy": "Մեր թիմը պատրաստ է օգնել ձեր կազմակերպությանը նախագծել և իրականացնել հուսալի ձեռնարկատիրական ենթակառուցվածք։",
-      "en": "Our team is ready to help your organization design and implement reliable enterprise infrastructure.",
-      "ru": "Наша команда готова помочь вашей организации спроектировать и внедрить надежную корпоративную инфраструктуру."
+    "team": {
+      "title": {
+        "hy": "",
+        "en": "",
+        "ru": ""
+      },
+      "text": {
+        "hy": "",
+        "en": "",
+        "ru": ""
+      }
     }
   },
+  "clientsTitle": {
+    "hy": "Կազմակերպություններ, որոնք ընտրել են DigiBase-ը որպես իրենց",
+    "en": "Organizations that have chosen DigiBase as their trusted",
+    "ru": "Организации, которые выбрали DigiBase в качестве своего"
+  },
+  "clientsSubtitle": {
+    "hy": "տեխնոլոգիական գործընկեր",
+    "en": "technology partner",
+    "ru": "технологического партнера"
+  },
+  "clientsDescription": {
+    "hy": "",
+    "en": "",
+    "ru": ""
+  },
+  "ctaTitle": {
+    "hy": "",
+    "en": "",
+    "ru": ""
+  },
+  "ctaDescription": {
+    "hy": "",
+    "en": "",
+    "ru": ""
+  }
+},
   "contact": {
   "eyebrow": {
     "hy": "ԿԱՊ ՄԵԶ ՀԵՏ",
