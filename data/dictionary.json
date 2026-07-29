@@ -649,21 +649,21 @@
       "ru": "Партнеры"
     }
   },
-  "solutions": {
+"solutions": {
   "eyebrow": {
     "en": "Solutions & Projects",
     "hy": "Լուծումներ և Նախագծեր",
     "ru": "Решения и Проекты"
   },
   "title1": {
-    "en": "Engineering Solutions with",
-    "hy": "Ինժեներական Լուծումներ",
-    "ru": "Инженерные Решения"
+    "en": "Engineering Solutions with Lasting Impact",
+    "hy": "Ինժեներական լուծումներ՝ երկարաժամկետ ազդեցությամբ",
+    "ru": "Инженерные решения с долгосрочным эффектом"
   },
   "title2": {
-    "en": "Lasting Impact",
-    "hy": "Կայուն Ազդեցությամբ",
-    "ru": "с долгосрочным эффектом"
+    "en": "",
+    "hy": "",
+    "ru": ""
   },
   "description1": {
     "en": "We design and implement technology solutions that guarantee the seamless operation and digital evolution of critical enterprise systems.",
