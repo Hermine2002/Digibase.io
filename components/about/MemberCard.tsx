@@ -25,7 +25,7 @@ export function MemberCard({
   const name = member.name[language] || member.name.hy;
   const role = member.role[language] || member.role.hy;
 
-  // Typing Effect logic (աշխատում է միայն այն դեպքում, երց ղեկավար է և hover է եղել)
+  // Typing Effect logic (աշխատում է միայն այն դեպքում, երբ ղեկավար է և hover է եղել)
   useEffect(() => {
     if (isHovered && isLeader) {
       setTypedText("");
@@ -59,13 +59,13 @@ export function MemberCard({
             : "opacity-100 scale-100 pointer-events-auto"
         }`}
       >
-        <div className="relative h-32 w-32 overflow-hidden rounded-2xl border-2 border-[#00c050]/20 shadow-inner">
+        <div className="relative h-44 w-44 overflow-hidden rounded-2xl shadow-inner">
           {member.photo ? (
             <Image
               src={member.photo}
               alt={name}
               fill
-              sizes="128px"
+              sizes="176px"
               className="object-cover"
             />
           ) : (
@@ -77,7 +77,7 @@ export function MemberCard({
           )}
         </div>
 
-        <h4 className="mt-4 text-lg font-bold tracking-tight text-black">
+        <h4 className="mt-4 text-lg font-bold tracking-tight text-zinc-900">
           {name}
         </h4>
 
@@ -87,7 +87,7 @@ export function MemberCard({
             Hover to view details →
           </span>
         ) : (
-          <span className="mt-2 text-xs font-medium text-zinc-500 bg-zinc-100 px-3 py-1 rounded-full">
+          <span className="mt-2 text-xs font-semibold text-zinc-700 bg-zinc-100 px-3 py-1 rounded-full">
             {role}
           </span>
         )}
@@ -126,17 +126,17 @@ export function MemberCard({
           </div>
 
           {/* Անունը */}
-          <h4 className="mt-3 text-base font-bold text-black border-b border-zinc-200 pb-2 w-full">
+          <h4 className="mt-3 text-base font-bold text-zinc-900 border-b border-zinc-200 pb-2 w-full">
             {name}
           </h4>
 
-          {/* ՀԵՐԹՈՎ ՏՊՎՈՂ ԻՆՖՈՐՄԱՑԻԱ (Typing effect) */}
+          {/* ՀԵՐԹՈՎ ՏՊՎՈՂ ԻՆՖՈՐՄԱՑԻԱ (Typing effect) - Ավելի մեծ և հաստ տեքստ (text-sm) */}
           <div className="mt-3 w-full text-left">
-            <p className="text-xs leading-relaxed text-zinc-700 font-medium min-h-[60px]">
+            <p className="text-sm leading-relaxed text-zinc-900 font-semibold min-h-[60px]">
               {typedText}
               {/* Տպող կուրսորի էֆեկտ */}
               {isHovered && (
-                <span className="inline-block w-1.5 h-3 ml-0.5 bg-[#00c050] animate-pulse" />
+                <span className="inline-block w-2 h-4 ml-0.5 bg-[#00c050] animate-pulse" />
               )}
             </p>
           </div>

@@ -168,9 +168,7 @@ export function VendorsPreview() {
         <BlurReveal delay={0.2}>
           <div className="mt-28 text-center">
             <span className="eyebrow">{vp.partnersTitle[language]}</span>
-            <h3 className="mt-5 text-3xl font-bold tracking-tight text-black md:text-5xl">
-              {vp.partnersSubtitle[language]}
-            </h3>
+         
             <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-zinc-600">
               {vp.partnersDescription[language]}
             </p>
@@ -298,25 +296,7 @@ export function VendorsPreview() {
         </BlurReveal>
 
         {/* CTA */}
-        <BlurReveal delay={0.5}>
-          <div className="mt-20 rounded-[32px] md:rounded-[40px] bg-black px-8 py-14 text-center text-white md:px-16">
-            <h3 className="text-3xl font-bold md:text-5xl">
-              {vp.cta.title[language]}
-            </h3>
-
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/70">
-              {vp.cta.description[language]}
-            </p>
-
-            <Link
-              href="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-semibold text-black transition hover:scale-105"
-            >
-              {vp.cta.button[language]}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </BlurReveal>
+        
       </div>
     </section>
   );

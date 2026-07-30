@@ -22,8 +22,6 @@ const sectionTitles = {
   },
 };
 
-
-
 export default function AboutPage() {
   const activeIndexRef = useRef(0);
   const { language, t } = useLanguage();
@@ -35,7 +33,7 @@ export default function AboutPage() {
   return (
    <div id="about-scroll-container" className="relative bg-white">
       {/* 3D-ն դիր որպես բացարձակ ֆոն (absolute) ամբողջ բլոկի տակ */}
-          <HeroScene />
+      <HeroScene />
       <div className="absolute inset-0 z-0 pointer-events-none">
         <AboutBackdrop3DLoader containerId="about-scroll-container" activeIndexRef={activeIndexRef} />
       </div>
@@ -45,42 +43,42 @@ export default function AboutPage() {
 
       <div className="relative z-10">
         {/* HERO */}
-      
-          <AboutSectionReveal index={0} activeIndexRef={activeIndexRef}>
-  {/* Ավելացրի՛ր relative և overflow-hidden */}
-  <section className="relative border-b border-border overflow-hidden min-h-[500px]">
-    
-    {/* Three.js Background Component (absolute-ով նստելու է ամբողջ section-ի վրա) */}
+        <AboutSectionReveal index={0} activeIndexRef={activeIndexRef}>
+          <section className="relative border-b border-border overflow-hidden min-h-[500px]">
+            
+            {/* Բովանդակությունը (Text-ը) տեղաշարժված է դեպի աջ (pl-6 md:pl-16) */}
+            <div className="relative z-10 container-x py-24 md:py-32 bg-white/80 backdrop-blur-sm w-full rounded-3xl border border-border shadow-2xl">
+              <div className="max-w-4xl pl-6 md:pl-16 text-left">
+            
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#00c050]/20 bg-[#00c050]/10 px-4 py-1.5 backdrop-blur-md">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#00c050] animate-pulse" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-[#00c050] font-medium">
+                    {ab.aboutUs[language]}
+                  </span>
+                </div>
 
-    
-    {/* Բովանդակությունը (Text-ը) պետք է ունենա relative և z-10, որպեսզի 3D-ից վերև երևա */}
-    <div className="relative z-10 container-x py-24 md:py-32 bg-white/80 backdrop-blur-sm w-full rounded-3xl border border-border shadow-2xl">
-    
-      <div className="inline-flex items-center gap-2 rounded-full border border-[#00c050]/20 bg-[#00c050]/10 px-4 py-1.5 backdrop-blur-md">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#00c050] animate-pulse" />
-        <span className="text-xs uppercase tracking-[0.3em] text-[#00c050] font-medium">
-          {ab.aboutUs[language]}
-        </span>
-      </div>
+                <h1 className="mt-8 text-5xl font-bold tracking-tight md:text-6xl leading-[1.05] text-zinc-900">
+                  {ab.heroTitle[language]}
+                </h1>
 
-      <h1 className="mt-8 max-w-3xl text-5xl font-bold tracking-tight md:text-6xl leading-[1.05] text-black p-4">
-        {ab.heroTitle[language]}
-      </h1>
+                <p className="mt-8 text-lg font-bold text-[#00c050]">
+                  {ab.heroSubtitle1[language]}
+                </p>
 
-      <p className="mt-8 max-w-2xl text-lg font-bold text-[#00c050] p-4">
-        {ab.heroSubtitle1[language]}
-      </p>
+                <p className="mt-6 text-lg font-bold text-zinc-900">
+                  {ab.heroSubtitle2[language]}
+                </p>
+                <p className="mt-6 text-lg font-bold text-zinc-900">
+                    {ab.heroSubtitleTwo[language]}
+                </p>
 
-      <p className="mt-6 max-w-2xl text-lg font-bold text-[#000000] p-4">
-        {ab.heroSubtitle2[language]}
-      </p>
-
-      <div className="mt-10 h-px w-24 bg-gradient-to-r from-[#00c050]/20 to-transparent" />
-       <HeroScene />
-    </div>
-    
-  </section>
-</AboutSectionReveal>
+                <div className="mt-10 h-px w-24 bg-gradient-to-r from-[#00c050]/20 to-transparent" />
+                <HeroScene />
+              </div>
+            </div>
+            
+          </section>
+        </AboutSectionReveal>
 
         {/* TEAM */}
         <AboutSectionReveal index={3} activeIndexRef={activeIndexRef}>
@@ -94,11 +92,11 @@ export default function AboutPage() {
                     {ab.aboutUs[language]}
                   </span>
 
-                  <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl text-black">
+                  <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl text-zinc-900">
                     {ab.teamTitle[language]}
                   </h2>
 
-                  <div className="mt-6 space-y-6 text-lg text-zinc-600">
+                  <div className="mt-6 space-y-6 text-lg text-zinc-800 font-medium">
                     <p>{ab.teamText1[language]}</p>
                     <p>{ab.teamText2[language]}</p>
                   </div>
@@ -116,32 +114,31 @@ export default function AboutPage() {
 
               {/* TEAM SECTION CONTAINER */}
               <div className="space-y-20">
-             {/* SECTION 1: LEADERSHIP (3 Members) */}
-<div>
-  <div className="mb-8 border-b border-zinc-200 pb-4">
-    <h3 className="text-2xl font-bold tracking-tight text-black flex items-center gap-3">
-      <span className="h-2.5 w-2.5 rounded-full bg-[#00c050]" />
-      {sectionTitles.leaders[language]}
-    </h3>
-  </div>
+                {/* SECTION 1: LEADERSHIP (3 Members) */}
+                <div>
+                  <div className="mb-8 border-b border-zinc-200 pb-4">
+                    <h3 className="text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-3">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#00c050]" />
+                      {sectionTitles.leaders[language]}
+                    </h3>
+                  </div>
 
-  {/* ԱՎԵԼԱՑՎԱԾ Է [&>:hover]:z-50 style-ը */}
-  <div className="grid gap-10 sm:grid-cols-3 max-w-5xl mx-auto [&>:hover]:z-50 relative">
-    {leaders.map((member, index) => (
-      <MemberCard
-        key={member.id}
-        member={member}
-        language={language}
-        isLeader
-      />
-    ))}
-  </div>
-</div>
+                  <div className="grid gap-10 sm:grid-cols-3 max-w-5xl mx-auto [&>:hover]:z-50 relative">
+                    {leaders.map((member) => (
+                      <MemberCard
+                        key={member.id}
+                        member={member}
+                        language={language}
+                        isLeader
+                      />
+                    ))}
+                  </div>
+                </div>
 
                 {/* SECTION 2: STAFF MEMBERS (4 Members) */}
                 <div>
                   <div className="mb-8 border-b border-zinc-200 pb-4">
-                    <h3 className="text-2xl font-bold tracking-tight text-black flex items-center gap-3">
+                    <h3 className="text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-3">
                       <span className="h-2.5 w-2.5 rounded-full bg-zinc-400" />
                       {sectionTitles.team[language]}
                     </h3>
@@ -171,11 +168,10 @@ export default function AboutPage() {
                   {ab.aboutUs[language]}
                 </span>
 
-                <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl text-black">
-                  {ab.philosophyTitle[language]}
+                <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl text-zinc-900">
                 </h2>
 
-                <div className="mt-6 space-y-6 text-lg text-zinc-600">
+                <div className="mt-6 space-y-6 text-lg text-zinc-800 font-medium">
                   <p>{ab.philosophyText1[language]}</p>
                 </div>
               </div>
@@ -203,12 +199,13 @@ export default function AboutPage() {
                     {ab.aboutUs[language]}
                   </span>
 
-                  <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl text-black">
+                  <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl text-zinc-900">
                     {ab.journeyTitle[language]}
                   </h2>
 
-                  <div className="mt-6 space-y-6 text-lg text-zinc-600">
+                  <div className="mt-6 space-y-6 text-lg text-zinc-800 font-medium">
                     <p>{ab.journeyText1[language]}</p>
+                    <p>{ab.journeyText2[language]}</p>
                   </div>
                 </div>
 

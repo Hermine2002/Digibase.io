@@ -10,7 +10,7 @@ export function PartnersPreview() {
   const pp = t.partners;
 
   return (
-    <section className="relative overflow-hidden py-28 md:py-36 bg-white p-4">
+    <section className="relative overflow-hidden py-28 md:py-36 bg-white p-10">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-zinc-50 to-white" />
       <div className="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#00c050]/10 blur-[120px]" />
 
@@ -40,23 +40,7 @@ export function PartnersPreview() {
           </div>
         </BlurReveal>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          <TrustCard
-            icon={<Building2 className="text-[#00c050]" />}
-            title={pp.trustCards.enterprise.title[language]}
-            text={pp.trustCards.enterprise.text[language]}
-          />
-          <TrustCard
-            icon={<ShieldCheck className="text-[#00c050]" />}
-            title={pp.trustCards.security.title[language]}
-            text={pp.trustCards.security.text[language]}
-          />
-          <TrustCard
-            icon={<Users className="text-[#00c050]" />}
-            title={pp.trustCards.team.title[language]}
-            text={pp.trustCards.team.text[language]}
-          />
-        </div>
+       
       </div>
     </section>
   );

@@ -154,36 +154,41 @@ export default function SolutionsPage() {
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,192,80,0.08),transparent_50%)]" />
         
+        {/* Տեղաշարժված է դեպի աջ (pl-6 md:pl-16) */}
         <div className="relative container-x py-32 md:py-40">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#00c050]/30 bg-[#00c050]/10 px-4 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#00c050] animate-pulse" />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#00c050] font-medium">
-              {sp.eyebrow[language]}
-            </span>
-          </div>
+          <div className="max-w-4xl pl-6 md:pl-16 text-left">
 
-          <h1 className="mt-8 max-w-4xl text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] text-black">
-            {sp.title1[language]}{" "}
-            <span className="text-[#00c050]">
-              {sp.title2[language]}
-            </span>
-          </h1>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#00c050]/30 bg-[#00c050]/10 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00c050] animate-pulse" />
+              <span className="text-xs uppercase tracking-[0.3em] text-[#00c050] font-medium">
+                {sp.eyebrow[language]}
+              </span>
+            </div>
 
-          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-zinc-600">
-            {sp.description1[language]}
-          </p>
+            <h1 className="mt-8 text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] text-zinc-900">
+              {sp.title1[language]}{" "}
+              <span className="text-[#00c050]">
+                {sp.title2[language]}
+              </span>
+            </h1>
 
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-zinc-500">
-            {sp.description2[language]}
-          </p>
-
-          <div className="mt-12 pt-8 border-t border-zinc-200/80">
-            <h2 className="text-2xl md:text-3xl font-bold text-black tracking-tight">
-              {sp.featuredTitle[language]}
-            </h2>
-            <p className="mt-2 text-sm md:text-base text-zinc-600">
-              {sp.featuredSubtitle[language]}
+            <p className="mt-8 text-lg leading-relaxed text-zinc-900 font-semibold">
+              {sp.description1[language]}
             </p>
+
+            <p className="mt-4 text-base leading-relaxed text-zinc-800 font-medium">
+              {sp.description2[language]}
+            </p>
+
+            <div className="mt-12 pt-8 border-t border-zinc-200/80">
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 tracking-tight">
+                {sp.featuredTitle[language]}
+              </h2>
+              <p className="mt-2 text-sm md:text-base text-zinc-700 font-medium">
+                {sp.featuredSubtitle[language]}
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
