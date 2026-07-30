@@ -21,30 +21,38 @@ export function MemberCard({
 }: MemberCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [typedText, setTypedText] = useState("");
-
   const name = member.name[language] || member.name.hy;
   const role = member.role[language] || member.role.hy;
 
   // Typing Effect logic (աշխատում է միայն այն դեպքում, երբ ղեկավար է և hover է եղել)
   useEffect(() => {
-    if (isHovered && isLeader) {
-      setTypedText("");
-      let i = 0;
-      const timer = setInterval(() => {
-        if (i < role.length) {
-          setTypedText((prev) => prev + role.charAt(i));
-          i++;
-        } else {
-          clearInterval(timer);
-        }
-      }, 30);
+    let isCancelled = false;
 
-      return () => clearInterval(timer);
-    } else {
+    const typeText = async () => {
+      if (!isHovered || !isLeader || !role) return;
+
+      // Սկզբից մաքրում ենք կամ զրոյացնում, եթե պետք է
       setTypedText("");
-    }
+
+      for (let i = 0; i < role.length; i++) {
+        if (isCancelled) break;
+
+        // Սպասում ենք 30մվ (Promise-ով հիմնված setTimeout)
+        await new Promise((resolve) => setTimeout(resolve, 30));
+
+        if (isCancelled) break;
+
+        setTypedText((prev) => prev + role.charAt(i));
+      }
+    };
+
+    typeText();
+
+    return () => {
+      isCancelled = true; // Կանգնեցնում է լոպը, եթե կոմպոնենտը ունմաունթ լինի կամարդյունքը փոխվի
+    };
   }, [isHovered, isLeader, role]);
-
+  
   return (
     <div
       className="relative h-[320px] w-full cursor-pointer"
