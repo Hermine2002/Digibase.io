@@ -6,12 +6,12 @@ import * as THREE from "three";
 import { clients } from "@/data/clients";
 import { useLanguage } from "@/context/LanguageContext";
 
-// ─── Galaxy Orbit Configuration (Ավելի լայն ու ընդարձակ էկրանի համար) ───
+// ─── Galaxy Orbit Configuration ───
 const ORBIT_RADIUS_X = 520;
 const ORBIT_RADIUS_Z = 340;
 const ORBIT_RADIUS_Y = 90;
 const TILT_ANGLE = 0.25;
-const AUTO_ROTATE_SPEED = 0.018; 
+const AUTO_ROTATE_SPEED = 0.015; // Ավելի սահուն և հարթ պտույտ
 
 export function ClientsExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ export function ClientsExperience() {
   const { language, t } = useLanguage();
   const pp = t.partners;
 
-  // Three.js 3D ֆոնային էֆեկտ
+  // ─── Three.js 3D Ֆոնային էֆեկտ ───
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -52,7 +52,7 @@ export function ClientsExperience() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 3, 50); // Սպիտակ լույսի ակցենտ
+    const pointLight = new THREE.PointLight(0xffffff, 3, 50);
     pointLight.position.set(2, 2, 2);
     scene.add(pointLight);
 
@@ -78,7 +78,8 @@ export function ClientsExperience() {
     }
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    // Սահմանափակում ենք Pixel Ratio-ն, որպեսզի ծանր չլինի վեբ կայքի համար
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
@@ -137,7 +138,7 @@ export function ClientsExperience() {
     };
   }, []);
 
-  // Քարտերի պտտման անիմացիա
+  // ─── Քարտերի պտտման անիմացիա ───
   useEffect(() => {
     const bgTween = gsap.to(bgRef.current, {
       scale: 1.18,
@@ -174,21 +175,17 @@ export function ClientsExperience() {
 
         const scaleCard = 0.52 + normalizedDepth * 0.58;
         const opacity = 0.2 + normalizedDepth * 0.8;
-        const blur = (1 - normalizedDepth) * 3.5;
-        const rotateY = Math.sin(angle) * -18;
-        const rotateX = Math.cos(angle) * 10;
+        const blur = (1 - normalizedDepth) * 3;
+        const rotateY = Math.sin(angle) * -15;
+        const rotateX = Math.cos(angle) * 8;
 
         if (depth > maxDepth) {
           maxDepth = depth;
           frontIndex = i;
         }
 
-        el.style.transform = `
-          translate3d(${rawX}px, ${tiltedY}px, ${tiltedZ}px)
-          rotateY(${rotateY}deg)
-          rotateX(${rotateX}deg)
-          scale(${scaleCard})
-        `;
+        // Հարթեցված և ճշգրիտ ձևաչափված transform՝ թրթիռից խուսափելու համար
+        el.style.transform = `translate3d(${rawX}px, ${tiltedY}px, ${tiltedZ}px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(${scaleCard})`;
         el.style.opacity = String(Math.max(0, Math.min(1, opacity)));
         el.style.filter = `blur(${blur}px)`;
         el.style.zIndex = String(Math.round(normalizedDepth * 100));
@@ -209,7 +206,7 @@ export function ClientsExperience() {
   }, [total]);
 
   return (
-    <div className="relative w-full h-[650px] md:h-[750px] overflow-hidden ">
+    <div className="relative w-full h-[650px] md:h-[750px] overflow-hidden">
       <div className="relative h-full w-full overflow-hidden bg-transparent">
         {/* Dark Background Image */}
         <div
@@ -223,17 +220,14 @@ export function ClientsExperience() {
         />
 
         {/* Three.js 3D Interactive Canvas */}
-        <div
-          ref={containerRef}
-          className="absolute inset-0 z-10"
-        />
+        <div ref={containerRef} className="absolute inset-0 z-10" />
 
         {/* Star Field */}
-        <div className="absolute inset-0 pointer-events-none opacity-50">
+        <div className="absolute inset-0 pointer-events-none opacity-50 z-10">
           <StarField />
         </div>
 
-        {/* Galaxy Cards (Full Screen Wide & Dark Transparent with White Accent) */}
+        {/* Galaxy Cards Layer */}
         <div
           className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none w-full"
           style={{ perspective: "1500px" }}
@@ -253,32 +247,41 @@ export function ClientsExperience() {
                 ref={(el) => {
                   cardRefs.current[i] = el;
                 }}
+                style={{
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                }}
                 className={`
-                  absolute -translate-x-1/2 -translate-y-1/2 w-[300px] h-[230px] rounded-2xl
-                  bg-black/30 backdrop-blur-md border border-white/15
+                  absolute -translate-x-1/2 -translate-y-1/2 w-[260px] h-[190px] rounded-2xl
+                  bg-black/40 backdrop-blur-md border border-white/15
                   shadow-[0_8px_32px_rgba(0,0,0,0.5)]
-                  flex flex-col items-center justify-center p-5 gap-3 transition-all duration-300
+                  flex flex-col items-center justify-between p-3 transition-colors duration-300
+                  will-change-transform
                   ${
                     i === activeIndex
-                      ? "bg-black/65 shadow-[0_12px_48px_rgba(255,255,255,0.25),0_0_0_2px_rgba(255,255,255,0.9)] border-white"
+                      ? "bg-black/75 shadow-[0_12px_48px_rgba(255,255,255,0.25),0_0_0_2px_rgba(255,255,255,0.9)] border-white"
                       : ""
                   }
                 `}
               >
-                {/* Լոգո */}
-                <div className="w-full h-16 flex items-center justify-center px-4">
+                {/* Լոգոյի տարածք՝ մեծացված և հարմարեցված (h-28) */}
+                <div className="w-full h-28 flex items-center justify-center p-2 mt-1">
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="max-h-25 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]"
+                    className="max-h-full max-w-full w-auto object-contain select-none pointer-events-none block drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)]"
                     draggable={false}
+                    // Եթե ուզում եք, որ բոլոր լոգոները սպիտակ լինեն, բացեք ներքևի տողը՝
+                    // style={{ filter: "brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }}
                   />
                 </div>
 
-                {/* Լոգոյի անունը */}
-                <span className="text-xs md:text-sm font-semibold tracking-wide text-white/90 text-center truncate max-w-full px-2">
-                  {client.name}
-                </span>
+                {/* Լոգոյի անունը՝ ճիշտ դիրքավորված ներքևում */}
+                <div className="w-full text-center pb-2 pt-1 mt-auto">
+                  <span className="text-xs md:text-sm font-semibold tracking-wide text-white/90 truncate block px-2">
+                    {client.name}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

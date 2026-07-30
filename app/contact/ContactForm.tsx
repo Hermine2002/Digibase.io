@@ -121,11 +121,11 @@ ${fd.get("message")}
       <div ref={canvasContainerRef} className="absolute inset-0 z-0 pointer-events-none" />
 
       {/* HERO SECTION */}
-      <section className="relative border-b border-zinc-200 overflow-hidden z-10">
+      <section className="relative border-b border-zinc-200 overflow-hidden z-10 ">
         <div className="relative z-10 container-x py-32 md:py-40">
           <div className="max-w-4xl pl-6 md:pl-16 text-left">
 
-            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#00c050]">
+            <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#00c050] mr-8">
               {contact.eyebrow[language]}
             </span>
 
@@ -146,11 +146,11 @@ ${fd.get("message")}
 
       {/* MAIN CONTENT SECTION */}
       <section className="relative py-24 z-10">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-12 lg:grid-cols-12 ">
           {/* LEFT - CONTACT INFO */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">
+          <div className="lg:col-span-5 space-y-6 ml-8 ">
+            <div className="mb-8 ml-4">
+              <h2 className="text-2xl font-bold text-zinc-900 tracking-tight ">
                 {contact.officeTitle[language]}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-zinc-700 font-medium">
