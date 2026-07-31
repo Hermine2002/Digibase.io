@@ -5,6 +5,7 @@ import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 import * as THREE from "three";
+import { MarchingCubes } from "three/examples/jsm/objects/MarchingCubes.js";
 
 export default function ContactForm() {
   const [sending, setSending] = useState(false);
@@ -13,34 +14,61 @@ export default function ContactForm() {
 
   const canvasContainerRef = useRef<HTMLDivElement>(null);
 
-  // Three.js 3D ֆոնի ինտեգրում (ավելի փոքր մոդելով)
+  // Three.js Marching Cubes ֆոնի ինտեգրում (վերին հատվածի համար)
   useEffect(() => {
     if (!canvasContainerRef.current) return;
 
-    let camera: THREE.PerspectiveCamera, scene: THREE.Scene, renderer: THREE.WebGLRenderer, clock: THREE.Clock;
-    let mesh: THREE.Mesh;
-
     const container = canvasContainerRef.current;
 
+    let camera: THREE.PerspectiveCamera, scene: THREE.Scene, renderer: THREE.WebGLRenderer;
+    let light: THREE.DirectionalLight, pointLight: THREE.PointLight, ambientLight: THREE.AmbientLight;
+    let effect: MarchingCubes;
+    let time = 0;
+    const clock = new THREE.Clock();
+
+    const resolution = 28;
+    const numBlobs = 10;
+
     function init() {
-      camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.z = 5;
+      // Տեսախցիկի կարգավորումներ
+      const aspect = container.clientWidth / container.clientHeight;
+      camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
+      // Կենտրոնացումը մի փոքր դեպի վերև՝ հերոս բլոկի վրա
+      camera.position.set(-200, 200, 700); 
+      camera.lookAt(0, 100, 0);
 
       scene = new THREE.Scene();
-      clock = new THREE.Clock();
+      // Ֆոնը սպիտակ
+      scene.background = new THREE.Color(0xffffff);
 
-      // Փոքրացրած չափսեր (շառավիղը և խողովակի հաստությունը նվազեցված են)
-      const geometry = new THREE.TorusKnotGeometry(0.7, 0.2, 128, 32);
-      const material = new THREE.MeshBasicMaterial({
+      // Լուսավորություն
+      light = new THREE.DirectionalLight(0xffffff, 3);
+      light.position.set(0.5, 0.5, 1);
+      scene.add(light);
+
+      pointLight = new THREE.PointLight(0x00c050, 3, 0, 0);
+      pointLight.position.set(0, 0, 100);
+      scene.add(pointLight);
+
+      ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+      scene.add(ambientLight);
+
+      // Նյութ
+      const material = new THREE.MeshPhongMaterial({
         color: 0x00c050,
-        wireframe: true,
+        specular: 0x494949,
+        shininess: 50,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.55,
       });
 
-      mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
+      // Marching Cubes օբյեկտ
+      effect = new MarchingCubes(resolution, material, true, true, 100000);
+      effect.position.set(0, 0, 0);
+      effect.scale.set(750, 750, 750); // Մի փոքր ավելի կոմպակտ
+      scene.add(effect);
 
+      // Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(container.clientWidth, container.clientHeight);
@@ -56,17 +84,28 @@ export default function ContactForm() {
       renderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-    let animationFrameId: number;
+    function updateCubes(object: MarchingCubes, elapsedTime: number) {
+      object.reset();
+      const subtract = 12;
+      const strength = 1.2 / ((Math.sqrt(numBlobs) - 1) / 4 + 1);
 
+      for (let i = 0; i < numBlobs; i++) {
+        const ballx = Math.sin(i + 1.26 * elapsedTime * (1.03 + 0.5 * Math.cos(0.21 * i))) * 0.27 + 0.5;
+        // Անիմացիան կենտրոնացված է էկրանի վերին կեսի վրա
+        const bally = Math.abs(Math.cos(i + 1.12 * elapsedTime * Math.cos(1.22 + 0.1424 * i))) * 0.88 + 0.3; 
+        const ballz = Math.cos(i + 1.32 * elapsedTime * 0.1 * Math.sin(0.92 + 0.53 * i)) * 0.27 + 0.5;
+
+        object.addBall(ballx, bally, ballz, strength, subtract);
+      }
+      object.update();
+    }
+
+    let animationFrameId: number;
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
       const delta = clock.getDelta();
-
-      if (mesh) {
-        mesh.rotation.x += delta * 0.3;
-        mesh.rotation.y += delta * 0.5;
-      }
-
+      time += delta * 0.5;
+      updateCubes(effect, time);
       renderer.render(scene, camera);
     }
 
@@ -86,24 +125,17 @@ export default function ContactForm() {
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
-
     const fd = new FormData(e.currentTarget);
-
     const body = `
-${contact.form.fullName[language]}: ${fd.get("name")}
-${contact.form.company[language]}: ${fd.get("company")}
-${contact.form.email[language]}: ${fd.get("email")}
-${contact.form.phone[language]}: ${fd.get("phone")}
-${contact.form.subject[language]}: ${fd.get("subject")}
+${contact.form.fullName[language]}:${fd.get("name")}
+${contact.form.company[language]}:${fd.get("company")}
+${contact.form.email[language]}:${fd.get("email")}
+${contact.form.phone[language]}:${fd.get("phone")}
+${contact.form.subject[language]}:${fd.get("subject")}
 
-${contact.form.message[language]}:
-${fd.get("message")}
+${contact.form.message[language]}:${fd.get("message")}
 `;
-
-    window.location.href = `mailto:info@digibase.am?subject=${encodeURIComponent(
-      "DIGIBASE Inquiry"
-    )}&body=${encodeURIComponent(body)}`;
-
+    window.location.href = `mailto:info@digibase.am?subject=${encodeURIComponent(       "DIGIBASE Inquiry"     )}&body=${encodeURIComponent(body)}`;
     setTimeout(() => {
       toast.success(contact.toastSuccess[language]);
       setSending(false);
@@ -113,75 +145,68 @@ ${fd.get("message")}
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-white">
-      {/* BACKGROUND IMAGE / GRADIENT */}
-      <div className="absolute inset-0 bg-[url('/images/contact-bg.jpg')] bg-cover bg-center opacity-10" />
-      <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/80 to-white" />
-
-      {/* THREE.JS CONTAINER AS BACKGROUND */}
-      <div ref={canvasContainerRef} className="absolute inset-0 z-0 pointer-events-none" />
-
-      {/* HERO SECTION */}
-      <section className="relative border-b border-zinc-200 overflow-hidden z-10 ">
-        <div className="relative z-10 container-x py-32 md:py-40">
+      {/* ՀԵՐՈՍ ԲԼՈԿ (Վերևի հատված) */}
+      {/* Տեղադրված է z-index 20՝ ֆոնից բարձր լինելու համար */}
+      <section className="relative border-b border-zinc-200 overflow-hidden z-20">
+        <div className="container-x py-32 md:py-40">
           <div className="max-w-4xl pl-6 md:pl-16 text-left">
-
             <span className="text-xs font-semibold uppercase tracking-[0.35em] text-[#00c050] mr-8">
               {contact.eyebrow[language]}
             </span>
-
             <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight text-zinc-900">
               {contact.heroTitle[language]}{" "}
               <span className="text-[#00c050]">
                 {contact.heroTitleHighlight[language]}
               </span>
             </h1>
-
             <p className="mt-8 text-lg text-zinc-800 font-semibold leading-relaxed">
               {contact.heroDescription[language]}
             </p>
-
           </div>
         </div>
       </section>
 
-      {/* MAIN CONTENT SECTION */}
-      <section className="relative py-24 z-10">
-        <div className="container-x grid gap-12 lg:grid-cols-12 ">
+      {/* THREE.JS ՖՈՆ (Անցյալում absolute 0-ն էր, հիմա սահմանափակված է վերևով) */}
+      {/* Փոխված է container-ի բարձրությունը և տեղադրությունը */}
+      <div 
+        ref={canvasContainerRef} 
+        className="absolute top-0 left-0 w-full h-[60vh] z-10 pointer-events-none opacity-70" 
+      />
+
+      {/* MAIN CONTENT SECTION (Ներքևի ֆորմայի բլոկ) */}
+      {/* Ֆոնը մաքուր սպիտակ է՝ ֆորմայի բլոկի տակ */}
+      <section className="relative py-24 z-20 bg-white">
+        <div className="container-x grid gap-12 lg:grid-cols-12">
           {/* LEFT - CONTACT INFO */}
-          <div className="lg:col-span-5 space-y-6 ml-8 ">
+          <div className="lg:col-span-5 space-y-6 ml-8">
             <div className="mb-8 ml-4">
-              <h2 className="text-2xl font-bold text-zinc-900 tracking-tight ">
+              <h2 className="text-2xl font-bold text-zinc-900 tracking-tight">
                 {contact.officeTitle[language]}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-zinc-700 font-medium">
                 {contact.officeDescription[language]}
               </p>
             </div>
-
             <ContactCard
               icon={<MapPin className="text-[#00c050]" />}
               title={contact.info.addressTitle[language]}
               text={contact.info.address[language]}
             />
-
             <ContactCard
               icon={<Mail className="text-[#00c050]" />}
               title={contact.info.emailTitle[language]}
               text="info@digibase.am"
             />
-
             <ContactCard
               icon={<Phone className="text-[#00c050]" />}
               title={contact.info.phoneTitle[language]}
               text="+374 12 488888"
             />
-
-            {/* MAP */}
             <div className="mt-10 overflow-hidden rounded-[32px] border border-zinc-200 shadow-[0_40px_100px_rgba(0,0,0,.15)] transition duration-500 hover:-translate-y-2">
               <iframe
                 title="DIGIBASE Location"
                 src="https://www.google.com/maps?q=20+Baghramyan+Ave,+Yerevan,+Armenia&output=embed"
-                className="h-[380px] w-full"
+                className="h-[380px] w-full border-0"
               />
             </div>
           </div>
@@ -189,16 +214,14 @@ ${fd.get("message")}
           {/* RIGHT - FORM */}
           <form
             onSubmit={submit}
-            className="lg:col-span-7 rounded-[32px] border border-zinc-200 bg-white/80 backdrop-blur-xl p-8 md:p-12 shadow-[0_40px_120px_rgba(0,0,0,.12)]"
+            className="lg:col-span-7 rounded-[32px] border border-zinc-200 bg-white p-8 md:p-12 shadow-[0_40px_120px_rgba(0,0,0,.12)]"
           >
             <h2 className="text-3xl font-bold text-zinc-900">
               {contact.formTitle[language]}
             </h2>
-
             <p className="mt-3 text-zinc-700 font-medium">
               {contact.formSubtitle[language]}
             </p>
-
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               <Field
                 name="name"
@@ -206,14 +229,12 @@ ${fd.get("message")}
                 placeholder={contact.form.fullName[language]}
                 required
               />
-
               <Field
                 name="company"
                 label={contact.form.company[language]}
                 placeholder={contact.form.company[language]}
                 required
               />
-
               <Field
                 name="email"
                 label={contact.form.email[language]}
@@ -221,13 +242,11 @@ ${fd.get("message")}
                 type="email"
                 required
               />
-
               <Field
                 name="phone"
                 label={contact.form.phoneOptional[language]}
                 placeholder={contact.form.phoneOptional[language]}
               />
-
               <div className="md:col-span-2">
                 <Field
                   name="subject"
@@ -236,12 +255,10 @@ ${fd.get("message")}
                 />
               </div>
             </div>
-
             <div className="mt-6">
               <label className="text-xs font-semibold uppercase tracking-widest text-zinc-900">
                 {contact.form.message[language]}
               </label>
-
               <textarea
                 name="message"
                 rows={6}
@@ -250,7 +267,6 @@ ${fd.get("message")}
                 className="mt-3 w-full rounded-2xl border border-zinc-200 bg-white px-5 py-4 text-zinc-900 font-medium outline-none transition focus:border-[#00c050]"
               />
             </div>
-
             <button
               disabled={sending}
               className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-[#00c050] px-8 py-4 font-semibold text-white shadow-xl transition hover:-translate-y-1 hover:bg-[#00a042] disabled:opacity-50"
@@ -280,7 +296,6 @@ function ContactCard({
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#00c050]/10 text-[#00c050]">
           {icon}
         </div>
-
         <div>
           <h3 className="text-xs uppercase tracking-widest text-zinc-500 font-semibold">
             {title}
@@ -310,7 +325,6 @@ function Field({
       <label className="text-xs font-semibold uppercase tracking-widest text-zinc-900">
         {label}
       </label>
-
       <input
         name={name}
         type={type}
