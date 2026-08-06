@@ -222,7 +222,7 @@ function FloatingVendorCard({
       >
         {/* LAYER 1: Subtle Shadow Underneath */}
         <motion.div 
-          className="absolute inset-x-4 -bottom-4 h-8 rounded-full bg-black/20 blur-xl pointer-events-none -z-20"
+          className="absolute inset-x-4 -bottom-4 h-8 rounded-full bg-black/30 blur-xl pointer-events-none -z-20"
           animate={{
             opacity: isHovered ? 0.45 : 0.2,
             scale: isHovered ? 1.05 : 0.95,

@@ -61,4 +61,48 @@ export const vendors: Vendor[] = [
     category: "Security",
     scale: 1.2,
   },
+
+{
+    name: "Acra",
+    logo: "/images/vendors/acra.png",
+    category: "Security",
+    scale: 1.2,
+},
+
+{
+    name: "Ardshin",
+    logo: "/images/vendors/ardshinbank.svg",
+    category: "Security",
+    scale: 1.2,
+},
+{
+    name: "Armswissbank",
+    logo: "/images/vendors/armswissbank.png",
+    category: "Security",
+    scale: 1.2,
+},
+{
+    name: "HP",
+    logo: "/images/vendors/hp-Photoroom.png",
+    category: "Security",
+    scale: 1.2,
+},
+{
+    name: "Palato",
+    logo: "/images/vendors/paloalto-Photoroom.png",
+    category: "Security",
+    scale: 1.2,
+},
+{
+    name: "BPC",
+    logo: "/images/vendors/BPC.png",
+    category: "Security",
+    scale: 1.2,
+},
+{
+    name: "Dahua",
+    logo: "/images/vendors/Dahua_Technology_logo.svg.jpg",
+    category: "Security",
+    scale: 1.2,
+},
 ];

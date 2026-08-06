@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Html, Billboard } from "@react-three/drei";
 import * as THREE from "three";
@@ -13,7 +13,6 @@ const ORBIT_RADIUS = 5.6;
 function BackgroundBoxes() {
   const groupRef = useRef<THREE.Group>(null);
   
-  // Ստեղծում ենք պատահական քառակուսիներ (տուփեր) մեկ անգամ
   const boxes = useRef(
     Array.from({ length: 40 }, () => ({
       position: new THREE.Vector3(
@@ -34,10 +33,8 @@ function BackgroundBoxes() {
     const t = state.clock.elapsedTime;
     if (!groupRef.current) return;
 
-    // Դանդաղ պտտում ենք ամբողջ ֆոնային խումբը
     groupRef.current.rotation.y = t * 0.03;
 
-    // Առանձին պտտում ենք ամեն մի քառակուսի
     groupRef.current.children.forEach((child, i) => {
       const boxData = boxes[i];
       child.rotation.x += boxData.rotationSpeed.x;
@@ -54,7 +51,7 @@ function BackgroundBoxes() {
             color="#00c050"
             transparent
             opacity={0.12}
-            wireframe={i % 2 === 0} // Կեսը լցված, կեսը wireframe (ցանցաձև)
+            wireframe={i % 2 === 0}
           />
         </mesh>
       ))}
@@ -69,7 +66,6 @@ function SceneController() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Հաշվում ենք մկնիկի դիրքը -1-ից 1 միջակայքում
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
@@ -79,7 +75,6 @@ function SceneController() {
   }, []);
 
   useFrame((_, delta) => {
-    // Մկնիկի շարժման հետևից տեսարանի/տեսախցիկի նուրբ շարժ (Parallax)
     const targetX = mouse.current.x * 1.2;
     const targetY = 3.2 + mouse.current.y * 0.8;
 
@@ -92,7 +87,7 @@ function SceneController() {
 }
 
 // ================= VENDOR CARD =================
-function VendorAnchor({ index, vendor, total, orbitRef }: any) {
+function VendorAnchor({ index, vendor, total, orbitRef, onHover }: any) {
   const groupRef = useRef<THREE.Group>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -120,6 +115,7 @@ function VendorAnchor({ index, vendor, total, orbitRef }: any) {
   const handleMouseLeaveCard = () => {
     if (!cardRef.current) return;
     cardRef.current.style.transform = `translate(-25%, -50%) perspective(500px) rotateX(0deg) rotateY(0deg) scale(1)`;
+    onHover(false); // Աջակցում է hover-ի ավարտին
   };
 
   return (
@@ -133,13 +129,14 @@ function VendorAnchor({ index, vendor, total, orbitRef }: any) {
         >
           <div
             ref={cardRef}
+            onMouseEnter={() => onHover(true)} // Մկնիկը վրան է
             onMouseMove={handleMouseMoveCard}
             onMouseLeave={handleMouseLeaveCard}
             className="
               w-[160px]
               h-[105px]
               rounded-2xl
-              bg-white/85
+              bg-white
               backdrop-blur-xl
               border
               border-gray-200/90
@@ -162,9 +159,7 @@ function VendorAnchor({ index, vendor, total, orbitRef }: any) {
               alt={vendor.name}
               className="max-h-[58px] max-w-[110px] object-contain drop-shadow-sm"
             />
-            
           </div>
-          
         </Html>
       </Billboard>
     </group>
@@ -174,9 +169,12 @@ function VendorAnchor({ index, vendor, total, orbitRef }: any) {
 // ================= ORBIT CONTROLLER =================
 function OrbitController() {
   const orbitRef = useRef(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useFrame((_, delta) => {
-    orbitRef.current += delta * 0.15; // Պտտման արագություն
+    // Եթե hover է արված, արագությունը դարձնում ենք 0, հակառակ դեպքում՝ նորմալ պտտում
+    const speed = isHovered ? 0 : 0.15;
+    orbitRef.current += delta * speed;
   });
 
   return (
@@ -188,6 +186,7 @@ function OrbitController() {
           vendor={vendor}
           total={vendors.length}
           orbitRef={orbitRef}
+          onHover={setIsHovered}
         />
       ))}
     </>

@@ -67,9 +67,9 @@ export const team: Member[] = [
       ru: "Нарек Агабабян",
     },
     role: {
-      hy: "Ծրագրերի տնօրեն — IT և Տելեկոմ ոլորտների",
-      en: "Project Director —  in IT and Telecom",
-      ru: "Директор проектов — в сфере IT и Телеком",
+      hy: "Ծրագրերի տնօրեն",
+      en: "Project Director",
+      ru: "Директор проектов",
     },
     initials: "ՆԱ",
     photo: "/images/Նարեկ Աղաբաբյան.png",

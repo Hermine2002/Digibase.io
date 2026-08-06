@@ -2,7 +2,7 @@
   
   "nav": {
     "home": { "hy": "Գլխավոր", "en": "Home", "ru": "Главная" },
-    "about": { "hy": "Մեր Մասին", "en": "About", "ru": "О Наս" },
+    "about": { "hy": "Մեր Մասին", "en": "About", "ru": "О нас" },
     "solutions": { "hy": "Լուծումներ", "en": "Solutions", "ru": "Решения" },
     "partnership": { "hy": "Մատակարարներ", "en": "Partnership", "ru": "Вендоры" },
     "customers": { "hy": "Գործընկերներ", "en": "Customers", "ru": "Партнеры" },

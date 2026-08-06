@@ -8,9 +8,23 @@ import { LanguageProvider } from "@/context/LanguageContext";
 
 export const metadata: Metadata = {
   title: "DigiBase - Enterprise IT Infrastructure Solutions",
-  description: "Leading IT infrastructure solutions provider in Armenia. Data centers, cloud solutions, and enterprise security systems.",
-  keywords: ["IT infrastructure", "data center", "cloud solutions", "security systems", "Armenia"],
+  description:
+    "Leading IT infrastructure solutions provider in Armenia. Data centers, cloud solutions, and enterprise security systems.",
+  keywords: [
+    "IT infrastructure",
+    "data center",
+    "cloud solutions",
+    "security systems",
+    "Armenia",
+  ],
   authors: [{ name: "DigiBase" }],
+
+  icons: {
+    icon: "/Opt.5.svg",
+    shortcut: "/Opt.5.svg",
+    apple: "/Opt.5.svg",
+  },
+
   openGraph: {
     title: "DigiBase - Enterprise IT Infrastructure Solutions",
     description: "Building the digital foundation of tomorrow",
