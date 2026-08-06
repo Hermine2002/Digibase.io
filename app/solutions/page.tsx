@@ -103,7 +103,7 @@ function ProjectCard({
               </div>
 
               {/* SECONDARY GALLERY MEDIA */}
-              <div className="grid grid-cols-2 gap-5">
+              {/* <div className="grid grid-cols-2 gap-5">
                 {project.gallery.slice(1, 3).map((item, i) => (
                   <div key={i} className="group overflow-hidden rounded-2xl border border-zinc-200 shadow-lg">
                     {isVideoFile(item) ? (
@@ -126,7 +126,7 @@ function ProjectCard({
                     )}
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

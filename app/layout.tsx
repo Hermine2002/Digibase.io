@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import "@/styles/globals.css";
+// Suppress TS error for side-effect CSS import when no CSS module declarations exist
+// @ts-ignore
+import "../styles/globals.css";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";

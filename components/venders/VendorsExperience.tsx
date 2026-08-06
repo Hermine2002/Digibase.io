@@ -162,7 +162,7 @@ function VendorAnchor({ index, vendor, total, orbitRef }: any) {
               alt={vendor.name}
               className="max-h-[58px] max-w-[110px] object-contain drop-shadow-sm"
             />
-            <span className="">{vendor.name}</span>
+            
           </div>
           
         </Html>

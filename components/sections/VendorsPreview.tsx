@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback, ReactNode, useMemo, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useCallback, ReactNode, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,77 +10,93 @@ import {
   Globe2,
   Cpu,
 } from "lucide-react";
-import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 import { BlurReveal } from "@/components/ui/TextReveal";
 import { vendors } from "@/data/vendors";
 import { useLanguage } from "@/context/LanguageContext";
 
-// 3D Scene Component
-export function NeuralScene() {
-  const groupRef = useRef<THREE.Group>(null);
+// Three.js Particles Component
+function ParticleField() {
+  const pointsRef = useRef<THREE.Points>(null);
+  const materialRef = useRef<THREE.PointsMaterial>(null);
+  const { pointer } = useThree();
 
-  const { nodes, lines } = useMemo(() => {
-    const nodes: Array<[number, number, number]> = [];
-    for (let i = 0; i < 30; i++) {
-      const phi = Math.acos(-1 + (2 * i) / 30);
-      const theta = Math.sqrt(30 * Math.PI) * phi;
-      const r = 4;
-      nodes.push([r * Math.cos(theta) * Math.sin(phi), r * Math.sin(theta) * Math.sin(phi), r * Math.cos(phi)]);
+  const [particleTexture, setParticleTexture] = useState<THREE.Texture | null>(null);
+
+  useEffect(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.beginPath();
+      ctx.arc(32, 32, 28, 0, 2 * Math.PI);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
     }
-    const pts: number[] = [];
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i][0] - nodes[j][0];
-        const dy = nodes[i][1] - nodes[j][1];
-        const dz = nodes[i][2] - nodes[j][2];
-        if (dx * dx + dy * dy + dz * dz < 8) {
-          pts.push(...nodes[i], ...nodes[j]);
-        }
-      }
-    }
-    return { nodes, lines: new Float32Array(pts) };
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    setParticleTexture(texture);
   }, []);
 
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.15;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.2;
+  const count = 3000;
+  const [geometry] = useState(() => {
+    const geom = new THREE.BufferGeometry();
+    const vertices = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i += 3) {
+      vertices[i] = 2000 * Math.random() - 1000;
+      vertices[i + 1] = 2000 * Math.random() - 1000;
+      vertices[i + 2] = 2000 * Math.random() - 1000;
     }
+    geom.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    return geom;
   });
 
+  useFrame((state) => {
+    if (!pointsRef.current || !materialRef.current) return;
+
+    const targetRotationX = pointer.y * 0.5;
+    const targetRotationY = pointer.x * 0.5;
+
+    pointsRef.current.rotation.x += (targetRotationX - pointsRef.current.rotation.x) * 0.05;
+    pointsRef.current.rotation.y += (targetRotationY - pointsRef.current.rotation.y) * 0.05;
+
+    const time = state.clock.getElapsedTime() * 0.05;
+    const h = 0.33; 
+    const s = 0.2 + Math.sin(time * 2) * 0.15; 
+    const l = 0.4 + Math.cos(time * 3) * 0.2; 
+    materialRef.current.color.setHSL(h, s, l);
+  });
+
+  if (!particleTexture) return null;
+
   return (
-    <group ref={groupRef}>
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[6, 6, 6]} intensity={0.9} color="#ffffff" />
-      <pointLight position={[0, 0, -10]} intensity={0.3} color="#00c050" />
-
-      {nodes.map((p, i) => (
-        <mesh key={i} position={p}>
-          <sphereGeometry args={[0.16, 24, 24]} />
-          <meshStandardMaterial color="#00c050" metalness={0.6} roughness={0.25} />
-        </mesh>
-      ))}
-
-      <lineSegments>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[lines, 3]} />
-        </bufferGeometry>
-        <lineBasicMaterial color="#00c050" transparent opacity={0.25} />
-      </lineSegments>
-    </group>
+    <points ref={pointsRef} geometry={geometry}>
+      <pointsMaterial
+        ref={materialRef}
+        size={25}
+        sizeAttenuation={true}
+        map={particleTexture}
+        alphaTest={0.5}
+        transparent={true}
+        opacity={0.6}
+      />
+    </points>
   );
 }
 
-// Next.js-ում SSR Hydration-ից խուսափելու համար Dynamic Wrapper Canvas-ով
+export function NeuralScene() {
+  return <ParticleField />;
+}
+
 const NeuralCanvas = dynamic(
   () =>
     Promise.resolve(() => (
       <div className="absolute inset-0 pointer-events-none -z-10 h-full w-full">
-        <Canvas camera={{ position: [2,0, 9], fov: 120 }}>
+        <Canvas camera={{ position: [0, 0, 1000], fov: 55, near: 2, far: 2000 }}>
           <NeuralScene />
         </Canvas>
       </div>
@@ -88,39 +104,214 @@ const NeuralCanvas = dynamic(
   { ssr: false }
 );
 
+const CARD_WIDTH = 300;
+const IDLE_WIDTH = 90;
+const OFFSET_X = 90;
+
+// Individual 3D Floating Vendor Card Component using Motion Values & rAF
+function FloatingVendorCard({
+  vendor,
+  isActive,
+  distance,
+  xOffset,
+  rotateY,
+  scale,
+  opacity,
+  onClick,
+  onAnimationStart,
+  onAnimationComplete,
+}: {
+  vendor: typeof vendors[0];
+  isActive: boolean;
+  distance: number;
+  xOffset: number;
+  rotateY: number;
+  scale: number;
+  opacity: number;
+  onClick: () => void;
+  onAnimationStart: () => void;
+  onAnimationComplete: () => void;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Motion values for smooth physics-based mouse interactions
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth springs for tilt & rotation reactions
+  const springConfig = { damping: 25, stiffness: 150 };
+  const cardRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), springConfig);
+  const cardRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
+
+  // Dynamic Layer Transforms using translateZ
+  const glowZ = useSpring(isActive ? 30 : 10, springConfig);
+  const glassZ = useSpring(isActive ? 50 : 20, springConfig);
+  const logoZ = useSpring(isActive ? 80 : 35, springConfig);
+  const reflectionZ = useSpring(isActive ? 65 : 25, springConfig);
+
+  // Dynamic Shadow & Glow intensities based on hover/active state
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const centerX = rect.left + width / 2;
+    const centerY = rect.top + height / 2;
+    
+    // Normalize mouse position between -0.5 and 0.5 relative to card center
+    const normalizedX = (e.clientX - centerX) / width;
+    const normalizedY = (e.clientY - centerY) / height;
+
+    mouseX.set(normalizedX);
+    mouseY.set(normalizedY);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="absolute cursor-pointer"
+      style={{
+        zIndex: vendors.length - Math.abs(distance),
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
+      initial={false}
+      animate={{
+        x: xOffset,
+        rotateY: rotateY,
+        scale: scale,
+        opacity: opacity,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 26,
+      }}
+      onAnimationStart={onAnimationStart}
+      onAnimationComplete={onAnimationComplete}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.div
+        className="h-[340px] rounded-3xl relative will-change-transform flex flex-col items-center justify-center"
+        style={{
+          width: isActive ? CARD_WIDTH : IDLE_WIDTH,
+          transformStyle: "preserve-3d",
+          rotateX: cardRotateX,
+          rotateY: cardRotateY,
+        }}
+        // Continuous subtle breathing / floating idle animation
+        animate={{
+          y: [0, -8, 0],
+        }}
+        transition={{
+          duration: 5 + Math.abs(distance * 0.5),
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        {/* LAYER 1: Subtle Shadow Underneath */}
+        <motion.div 
+          className="absolute inset-x-4 -bottom-4 h-8 rounded-full bg-black/20 blur-xl pointer-events-none -z-20"
+          animate={{
+            opacity: isHovered ? 0.45 : 0.2,
+            scale: isHovered ? 1.05 : 0.95,
+          }}
+          transition={{ duration: 0.3 }}
+        />
+
+        {/* LAYER 2: Dynamic Glow Layer */}
+        <motion.div
+          className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/30 to-teal-400/30 blur-xl pointer-events-none -z-10"
+          style={{ zIndex: glowZ }}
+          animate={{
+            opacity: isHovered ? 0.8 : isActive ? 0.4 : 0.1,
+          }}
+          transition={{ duration: 0.3 }}
+        />
+
+        {/* LAYER 3: Premium Glass Card Base */}
+        <motion.div
+          className="absolute inset-0 bg-white/80 backdrop-blur-xl rounded-3xl border border-white/40 shadow-2xl overflow-hidden flex flex-col"
+          style={{
+            zIndex: glassZ,
+            boxShadow: isHovered 
+              ? "0 25px 50px -12px rgba(16, 185, 129, 0.25)" 
+              : "0 10px 30px -10px rgba(0, 0, 0, 0.08)"
+          }}
+        >
+          {/* LAYER 4: Glass Reflections (Specular sheen overlay) */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent pointer-events-none"
+            style={{
+              zIndex: reflectionZ,
+              transform: useTransform(mouseX, [-0.5, 0.5], ["-30%", "30%"]),
+            }}
+          />
+
+          {/* LAYER 5: Logo Area with Parallax Effect */}
+          <div className="flex-1 flex items-center justify-center p-6 bg-gradient-to-br from-emerald-50/40 via-white/60 to-zinc-50/50 overflow-hidden rounded-t-3xl relative">
+            <motion.img
+              src={vendor.logo}
+              alt={vendor.name}
+              className="max-h-20 max-w-full object-contain pointer-events-none drop-shadow-md"
+              style={{
+                z: logoZ,
+              }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export function VendorsPreview() {
   const { language, t } = useLanguage();
   const vp = t.vendorsPreview;
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(2);
   const [paused, setPaused] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const total = vendors.length;
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const next = useCallback(() => {
+    if (isAnimating) return;
     setCurrentIndex((prev) => (prev + 1) % total);
-  }, [total]);
+  }, [total, isAnimating]);
 
   const prev = useCallback(() => {
+    if (isAnimating) return;
     setCurrentIndex((prev) => (prev - 1 + total) % total);
-  }, [total]);
+  }, [total, isAnimating]);
 
+  const toSlide = (index: number) => {
+    if (isAnimating) return;
+    setCurrentIndex(index);
+  };
+
+  // Auto-play interval
   useEffect(() => {
     if (paused || total === 0) return;
-    const timer = setInterval(next, 4000);
+    const timer = setInterval(() => {
+      next();
+    }, 2500);
     return () => clearInterval(timer);
   }, [paused, total, next]);
 
   return (
-    <section className="relative overflow-hidden py-28 md:py-36">
+    <section className="relative overflow-hidden py-28 md:py-36 select-none w-full">
       {/* BACKGROUND */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-zinc-50 to-white" />
       <div className="absolute top-0 left-1/2 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-emerald-200/20 blur-[120px]" />
@@ -128,7 +319,7 @@ export function VendorsPreview() {
       {/* 3D NEURAL CANVAS */}
       <NeuralCanvas />
 
-      <div className="container-x relative z-10">
+      <div className="w-full px-4 sm:px-6 lg:px-12 relative z-10">
         {/* HEADER */}
         <BlurReveal>
           <div className="mx-auto max-w-4xl text-center">
@@ -143,7 +334,7 @@ export function VendorsPreview() {
         </BlurReveal>
 
         {/* FEATURE CARDS */}
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-3 max-w-7xl mx-auto">
           <FeatureCard
             icon={<Globe2 />}
             title={vp.features.directAccess.title[language]}
@@ -168,141 +359,98 @@ export function VendorsPreview() {
         <BlurReveal delay={0.2}>
           <div className="mt-28 text-center">
             <span className="eyebrow">{vp.partnersTitle[language]}</span>
-         
             <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-zinc-600">
               {vp.partnersDescription[language]}
             </p>
           </div>
         </BlurReveal>
 
-        {/* 3D CAROUSEL */}
+        {/* FULL WIDTH CAROUSEL CONTAINER */}
         <BlurReveal delay={0.3}>
           <div
-            className="relative mt-16 h-[500px] md:h-[560px] overflow-hidden rounded-[32px] md:rounded-[40px] border border-zinc-200 bg-white shadow-2xl perspective-[1200px]"
+            className="relative mt-16 flex flex-col items-center justify-center py-10 w-full overflow-hidden bg-white"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
             onTouchStart={() => setPaused(true)}
             onTouchEnd={() => setPaused(false)}
           >
-            {/* BACKGROUND GLOW */}
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-zinc-100" />
-            <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-300/20 blur-[100px]" />
+            {/* Carousel Wrapper */}
+            <div 
+              className="relative w-full max-w-4xl flex justify-center items-center py-12 overflow-visible"
+              style={{ perspective: "1200px" }}
+            >
+              {/* Slides Container */}
+              <div className="relative flex items-center justify-center w-full h-[360px]">
+                {vendors.map((vendor, i) => {
+                  const distance = i - currentIndex;
+                  const isActive = distance === 0;
 
-            {/* CARDS CONTAINER */}
-            <div className="relative flex h-full items-center justify-center">
-              {vendors.map((vendor, index) => {
-                const position = (index - currentIndex + total) % total;
-                const offset =
-                  position > total / 2 ? position - total : position;
-                const active = offset === 0;
+                  let xOffset = distance * OFFSET_X;
+                  if (distance > 0) xOffset = (CARD_WIDTH / 2) + (distance - 1) * OFFSET_X;
+                  if (distance < 0) xOffset = -(CARD_WIDTH / 2) + (distance + 1) * OFFSET_X;
 
-                const xStep = isMobile ? 160 : 260;
+                  const rotateY = distance < 0 ? 50 : distance > 0 ? -50 : 0;
+                  const scale = isActive ? 1 : 0.85;
+                  const opacity = Math.abs(distance) > 4 ? 0 : 1 - Math.abs(distance) * 0.18;
 
-                return (
-                  <motion.div
-                    key={vendor.name}
-                    className="absolute h-[250px] w-[290px] sm:h-[280px] sm:w-[360px] cursor-pointer rounded-[32px]"
-                    style={{
-                      zIndex: active ? 50 : 30 - Math.abs(offset),
-                      transformStyle: "preserve-3d",
-                    }}
-                    animate={{
-                      x: offset * xStep,
-                      rotateY: offset * (isMobile ? 25 : 35),
-                      scale: active
-                        ? 1.08
-                        : Math.max(0.65, 1 - Math.abs(offset) * 0.18),
-                      opacity: active
-                        ? 1
-                        : Math.max(0.2, 1 - Math.abs(offset) * 0.35),
-                      filter: active
-                        ? "blur(0px)"
-                        : `blur(${Math.abs(offset) * 1.5}px)`,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 180,
-                      damping: 22,
-                    }}
-                    onClick={() => setCurrentIndex(index)}
-                  >
-                    <div className="relative h-full w-full overflow-hidden rounded-[32px] border border-zinc-200 bg-white shadow-xl">
-                      {/* LOGO */}
-                      <div className="flex h-full items-center justify-center p-8 sm:p-12">
-                        <img
-                          src={vendor.logo}
-                          alt={vendor.name}
-                          className="max-h-full max-w-full object-contain transition-transform duration-700"
-                        />
-                      </div>
+                  return (
+                    <FloatingVendorCard
+                      key={vendor.name}
+                      vendor={vendor}
+                      isActive={isActive}
+                      distance={distance}
+                      xOffset={xOffset}
+                      rotateY={rotateY}
+                      scale={scale}
+                      opacity={opacity}
+                      onClick={() => toSlide(i)}
+                      onAnimationStart={() => setIsAnimating(true)}
+                      onAnimationComplete={() => setIsAnimating(false)}
+                    />
+                  );
+                })}
+              </div>
 
-                      {/* GLASS OVERLAY */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-                      {/* TEXT */}
-                      <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <h4 className="text-xl sm:text-2xl font-bold">
-                          {vendor.name}
-                        </h4>
-                        <p className="mt-1 text-xs sm:text-sm text-white/70">
-                          {vendor.category}
-                        </p>
-                      </div>
-
-                      {/* ACTIVE GLOW */}
-                      {active && (
-                        <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-2 ring-emerald-400/60" />
-                      )}
-                    </div>
-                  </motion.div>
-                );
-              })}
+              {/* Active Slide Frame Highlight */}
+              <motion.div
+                key={currentIndex}
+                className="absolute inset-0 m-auto h-[356px] border-2 border-emerald-500/60 rounded-[28px] pointer-events-none z-50"
+                style={{ width: CARD_WIDTH + 16, boxSizing: "content-box" }}
+                animate={{ scale: [1, 1.04, 1] }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              />
             </div>
 
-            {/* LEFT BUTTON */}
-            <button
-              onClick={prev}
-              aria-label="Previous Vendor"
-              className="absolute left-4 md:left-8 top-1/2 flex h-12 w-12 md:h-14 md:w-14 -translate-y-1/2 items-center justify-center rounded-2xl border border-zinc-200 bg-white shadow-lg transition hover:-translate-x-1 hover:shadow-xl z-50"
-            >
-              <ArrowLeft className="h-5 w-5 text-black" />
-            </button>
+            {/* CONTROLS */}
+            <div className="mt-10 flex items-center gap-4 justify-center text-neutral-700 rounded-full bg-white/80 backdrop-blur-md px-4 py-2 border border-zinc-200 shadow-lg z-50">
+              <button onClick={prev} className="p-2 cursor-pointer transition hover:text-emerald-600">
+                <ArrowLeft className="h-5 w-5" />
+              </button>
 
-            {/* RIGHT BUTTON */}
-            <button
-              onClick={next}
-              aria-label="Next Vendor"
-              className="absolute right-4 md:right-8 top-1/2 flex h-12 w-12 md:h-14 md:w-14 -translate-y-1/2 items-center justify-center rounded-2xl border border-zinc-200 bg-white shadow-lg transition hover:translate-x-1 hover:shadow-xl z-50"
-            >
-              <ArrowRight className="h-5 w-5 text-black" />
-            </button>
+              <div className="w-[180px] flex justify-center items-center gap-2">
+                {vendors.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => toSlide(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className={`rounded-full cursor-pointer h-2 transition-all duration-300 ${
+                      currentIndex === i ? "w-8 bg-emerald-500" : "w-2 bg-zinc-300"
+                    }`}
+                  />
+                ))}
+              </div>
 
-            {/* DOTS */}
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-50">
-              {vendors.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  aria-label={`Go to slide ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    i === currentIndex
-                      ? "w-8 md:w-10 bg-emerald-500"
-                      : "w-2 bg-zinc-300"
-                  }`}
-                />
-              ))}
+              <button onClick={next} className="p-2 cursor-pointer transition hover:text-emerald-600">
+                <ArrowRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </BlurReveal>
-
-        {/* CTA */}
-        
       </div>
     </section>
   );
 }
 
-// FEATURE CARD COMPONENT
 function FeatureCard({
   icon,
   title,
@@ -323,11 +471,8 @@ function FeatureCard({
       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600">
         {icon}
       </div>
-
       <h4 className="mt-6 text-xl font-bold text-black">{title}</h4>
-
       <p className="mt-4 leading-7 text-zinc-600">{text}</p>
-
       <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-emerald-600">
         <CheckCircle2 className="h-4 w-4" />
         {badge}

@@ -211,7 +211,7 @@ export default function AboutPage() {
 
                 <div className="relative aspect-[4/3] w-full rounded-3xl border border-border bg-white shadow-2xl overflow-hidden">
                   <Image
-                    src="/images/Gemini_Generated_Image_ezcqwmezcqwmezcq.png"
+                    src="/images/Gemini_Generated_Image_hrkxgahrkxgahrkx.png"
                     alt="DigiBase journey"
                     fill
                     className="object-cover"
