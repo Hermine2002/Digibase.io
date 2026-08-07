@@ -7,13 +7,11 @@ import * as THREE from "three";
 function Nodes({ count = 90 }: { count?: number }) {
   const meshRef = useRef<THREE.InstancedMesh>(null!);
   const dummy = useMemo(() => new THREE.Object3D(), []);
-
   const elapsed = useRef(0);
 
   const nodes = useMemo(() => {
     return Array.from({ length: count }, (_, index) => {
       const t = index / Math.max(1, count);
-
       return {
         pos: new THREE.Vector3(
           Math.sin(t * Math.PI * 2) * 7 + ((index % 7) - 3) * 0.45,
@@ -28,7 +26,6 @@ function Nodes({ count = 90 }: { count?: number }) {
 
   useFrame((_, delta) => {
     elapsed.current += delta;
-
     const t = elapsed.current;
 
     nodes.forEach((node, i) => {
@@ -39,7 +36,6 @@ function Nodes({ count = 90 }: { count?: number }) {
       );
 
       const scale = 0.04 + (Math.sin(t + i) + 1) * 0.02;
-
       dummy.scale.setScalar(scale);
       dummy.updateMatrix();
 
@@ -66,7 +62,6 @@ function Lines() {
 
     for (let i = 0; i < 60; i++) {
       const t = i / 60;
-
       const a = new THREE.Vector3(
         Math.sin(t * Math.PI * 2) * 6,
         Math.cos(t * Math.PI * 1.6) * 3,
@@ -87,15 +82,12 @@ function Lines() {
     }
 
     const geo = new THREE.BufferGeometry();
-
     geo.setAttribute("position", new THREE.Float32BufferAttribute(points, 3));
-
     return geo;
   }, []);
 
   useFrame((_, delta) => {
     elapsed.current += delta;
-
     if (ref.current) {
       ref.current.rotation.z = Math.sin(elapsed.current * 0.1) * 0.05;
     }
@@ -111,29 +103,32 @@ function Lines() {
 function Rig() {
   useFrame(({ camera, mouse }, delta) => {
     const scrollY = typeof window !== "undefined" ? window.scrollY : 0;
-
-    const targetX = mouse.x * 0.6;
-
-    const targetY = mouse.y * 0.4 + scrollY * 0.002;
+    
+    // Տեղաշարժում ենք մկնիկի ազդեցությունը և բազային դիրքը դեպի աջ (+1.8)
+    const targetX = mouse.x * 0.5 + 1.8;
+    const targetY = mouse.y * 0.3 + scrollY * 0.002;
 
     camera.position.x += (targetX - camera.position.x) * delta * 4;
-
     camera.position.y += (targetY - camera.position.y) * delta * 4;
-
     camera.position.z = 8 + scrollY * 0.004;
 
-    camera.lookAt(0, 0, 0);
+    // Տեսախցիկը նայում է փոքր-ինչ աջ կենտրոնին, որ օբյեկտները մնան աջում
+    camera.lookAt(1.5, 0, 0);
   });
 
   return null;
 }
 
+// HeroScene.tsx
+
+// ... իմպորտները և այլ ֆունկցիաները (Nodes, Lines, Rig) մնում են նույնը
+
 export function HeroScene() {
   return (
     <Canvas
       camera={{
-        position: [0, 0, 8],
-        fov: 55,
+        position: [2, 0, 8], // Տեսախցիկը փոքր-ինչ աջ է նայում
+        fov: 50,
       }}
       dpr={[1, 1.25]}
       gl={{
@@ -142,13 +137,17 @@ export function HeroScene() {
         powerPreference: "high-performance",
       }}
       frameloop="always"
-      className="!absolute inset-0"
+      className="!absolute inset-0 pointer-events-none z-0" // Ապահովում ենք, որ այն ֆոնին է
     >
       <ambientLight intensity={0.6} />
 
-      <Nodes count={90} />
-
-      <Lines />
+      {/* --- ԱՅՍՏԵՂ ԵՆ ՓՈՓՈԽՈՒԹՅՈՒՆՆԵՐԸ --- */}
+      {/* Մենք խմբավորում ենք բոլոր օբյեկտները և փոքրացնում ենք 50%-ով (scale={[0.5, 0.5, 0.5]}) */}
+      <group scale={[0.5, 0.5, 0.5]} position={[2, 0, 0]}>
+        <Nodes count={90} />
+        <Lines />
+      </group>
+      {/* ----------------------------------- */}
 
       <Rig />
     </Canvas>

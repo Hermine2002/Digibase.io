@@ -324,8 +324,11 @@ export function VendorsPreview() {
         <BlurReveal>
           <div className="mx-auto max-w-4xl text-center">
             <span className="eyebrow">{vp.eyebrow[language]}</span>
-            <h2 className="mt-5 text-4xl font-bold tracking-tight text-black md:text-6xl">
+            <h2 className="mt-5 text-4xl font-bold tracking-tight text-black md:text-6xl ">
               {vp.mainTitle[language]}
+            </h2>
+            <h2 className="mt-5 text-4xl font-bold tracking-tight text-[#00c050] md:text-6xl ">
+               {vp.minititleTwo[language]}
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-zinc-600">
               {vp.mainDescription[language]}
@@ -358,8 +361,8 @@ export function VendorsPreview() {
         {/* PARTNER TITLE */}
         <BlurReveal delay={0.2}>
           <div className="mt-28 text-center">
-            <span className="eyebrow">{vp.partnersTitle[language]}</span>
-            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-zinc-600">
+            <span className="eyebrow text-bleck font-bold">{vp.partnersTitle[language]}</span>
+            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-bleck font-bold">
               {vp.partnersDescription[language]}
             </p>
           </div>
@@ -468,13 +471,13 @@ function FeatureCard({
       transition={{ duration: 0.3 }}
       className="rounded-[28px] border border-zinc-200 bg-white p-8 shadow-sm transition hover:shadow-xl"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600">
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-[#00c050]">
         {icon}
       </div>
       <h4 className="mt-6 text-xl font-bold text-black">{title}</h4>
       <p className="mt-4 leading-7 text-zinc-600">{text}</p>
-      <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-emerald-600">
-        <CheckCircle2 className="h-4 w-4" />
+      <div className="mt-6 flex items-center gap-2 text-sm font-semibold  text-[#00c050]">
+        <CheckCircle2 className="h-4 w-4 text-[#00c050]" />
         {badge}
       </div>
     </motion.div>

@@ -6,7 +6,7 @@ import { Member, team } from "@/data/team";
 import { AboutBackdrop3DLoader } from "@/components/about/AboutBackdrop3DLoader";
 import { AboutSectionReveal } from "@/components/about/AboutSectionReveal";
 import { useLanguage } from "@/context/LanguageContext";
-import { HeroScene } from "@/components/3d/HeroSect";
+import { HeroScene } from "@/components/3d/HeroScen";
 import { MemberCard } from "@/components/about/MemberCard";
 
 const sectionTitles = {
@@ -162,7 +162,7 @@ export default function AboutPage() {
         {/* MISSION / PHILOSOPHY */}
         <AboutSectionReveal index={1} activeIndexRef={activeIndexRef}>
           <section className="border-b border-border py-24">
-            <div className="container-x grid gap-12 md:grid-cols-2 items-center">
+            <div className="container-x grid gap-12 md:grid-cols-2 items-center pl-5 pr-5">
               <div className="rounded-3xl border border-border bg-white/80 backdrop-blur-md p-8 md:p-10 shadow-xl">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#00c050]">
                   {ab.aboutUs[language]}
@@ -181,7 +181,7 @@ export default function AboutPage() {
                   src="/images/Gemini_Generated_Image_c7gg5zc7gg5zc7gg.png"
                   alt="DigiBase engineering philosophy"
                   fill
-                  className="object-cover"
+                  className="object-cover opacity-50"
                 />
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function AboutPage() {
           <section className="border-b border-border py-24">
             <HeroScene />
             <div className="container-x">
-              <div className="grid gap-12 md:grid-cols-2 items-center mb-16">
+              <div className="grid gap-12 md:grid-cols-2 items-center mb-16 pr-5 pl-5">
                 <div className="rounded-3xl border border-border bg-white/80 backdrop-blur-md p-8 md:p-10 shadow-xl">
                   <span className="text-xs font-semibold uppercase tracking-widest text-[#00c050]">
                     {ab.aboutUs[language]}
@@ -209,12 +209,12 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="relative aspect-[4/3] w-full rounded-3xl border border-border bg-white shadow-2xl overflow-hidden">
+                <div className="relative aspect-[4/3] w-full rounded-3xl border border-border bg-white shadow-2xl overflow-hidden pr-20">
                   <Image
                     src="/images/Gemini_Generated_Image_hrkxgahrkxgahrkx.png"
                     alt="DigiBase journey"
                     fill
-                    className="object-cover"
+                    className="object-cover opacity-50"
                   />
                 </div>
               </div>
